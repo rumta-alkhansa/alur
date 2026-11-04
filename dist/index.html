@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14213d">
+<title>Alur: Algoritma, Logika, Uji, Rancang</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="alur-icon.svg">
+<style>
+@font-face{font-family:"Baloo 2";src:url("fonts/baloo2-variable.ttf") format("truetype");font-style:normal;font-weight:600 800;font-display:swap}
+@font-face{font-family:Nunito;src:url("fonts/nunito-variable.ttf") format("truetype");font-style:normal;font-weight:600 700;font-display:swap}
+:root{--bg:#f2f6fb;--card:#fff;--tx:#14213d;--mu:#55627a;--pr:#1f6fe5;--ln:#d5deec;--ok:#14935a;--okbg:#d9f5e7;--no:#d03b3b;--nobg:#fde6e6;--ac:#ffc233;--hd:#14213d;--hdt:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1626;--card:#1a2338;--tx:#eaf0fb;--mu:#a3b0c8;--pr:#6aa3ff;--ln:#2f3b57;--ok:#53d69a;--okbg:#14382a;--no:#ff7b7b;--nobg:#3d1f24;--hd:#0a1020;--hdt:#fff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1626;--card:#1a2338;--tx:#eaf0fb;--mu:#a3b0c8;--pr:#6aa3ff;--ln:#2f3b57;--ok:#53d69a;--okbg:#14382a;--no:#ff7b7b;--nobg:#3d1f24;--hd:#0a1020;--hdt:#fff;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:700 17px/1.5 Nunito,system-ui,sans-serif;background:var(--bg)}
+header{background:var(--hd);color:var(--hdt);padding:18px 16px 12px}
+h1{font:800 26px/1.2 "Baloo 2",system-ui,sans-serif;margin:0}
+header p{margin:2px 0 10px;color:#c9d6ee;font-weight:600;font-size:15px}
+.tabs{display:flex;gap:8px;overflow-x:auto}
+.tab{flex:0 0 auto;border:0;border-radius:12px;padding:8px 14px;font:800 15px "Baloo 2",system-ui,sans-serif;background:#2a3a5e;color:#fff;cursor:pointer}
+.tab.on{background:var(--ac);color:#14213d}
+.tab.dn::after{content:" ⭐"}
+main{max-width:760px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:2px solid var(--ln);border-radius:18px;padding:14px 16px;margin-bottom:14px}
+h2{font:800 21px/1.3 "Baloo 2",system-ui,sans-serif;margin:0 0 4px}
+.mu{color:var(--mu);font-weight:600;font-size:15px;margin:0}
+ol.k{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+ol.k li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--bg);border:2px dashed var(--ln);cursor:pointer;user-select:none}
+ol.k li b{flex:0 0 28px;height:28px;border-radius:50%;background:var(--pr);color:#fff;display:grid;place-items:center;font-size:15px}
+ol.k li.dn{opacity:.55;text-decoration:line-through}
+.kt{flex:1;display:grid;gap:4px}
+.vz{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.vz i{font-style:normal;font-weight:700;font-size:15px;background:var(--card);border:2px solid var(--ln);border-radius:10px;padding:2px 8px}
+.vz u{text-decoration:none;font-weight:800;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff}
+.vz u.y{background:var(--ok)}.vz u.n{background:var(--no)}
+ol.k li.sel{border:2px solid var(--ac);background:var(--card)}
+.ck{border:2px solid var(--ln);background:var(--card);color:var(--tx);border-radius:10px;padding:6px 10px;font:800 13px "Baloo 2",system-ui,sans-serif;cursor:pointer}
+.hl{box-shadow:inset 0 0 0 40px rgba(255,194,51,.4)}
+.hl2{outline:4px solid var(--ac);outline-offset:1px}
+.gt{font:800 16px "Baloo 2",system-ui,sans-serif;margin:10px 0 6px}
+.sc{overflow-x:auto;padding-bottom:4px}
+table{border-collapse:separate;border-spacing:6px}
+th{font-weight:800;font-size:14px;color:var(--mu);padding:2px 4px;min-width:66px;vertical-align:bottom}
+th.r{text-align:left;color:var(--tx);font-size:16px;white-space:nowrap}
+.e{display:block;font-size:26px;line-height:1.1}
+.cell{width:64px;height:64px;border-radius:14px;border:2px solid var(--ln);background:var(--card);color:var(--tx);font:800 30px system-ui,sans-serif;cursor:pointer;touch-action:manipulation}
+.cell:focus-visible,.btn:focus-visible,.tab:focus-visible,ol.k li:focus-visible{outline:3px solid var(--pr);outline-offset:2px}
+.c1{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.c2{background:var(--nobg);border-color:var(--no);color:var(--no)}
+.bad{outline:4px solid var(--no);animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.btn{border:0;border-radius:14px;padding:12px 16px;font:800 16px "Baloo 2",system-ui,sans-serif;background:var(--pr);color:#fff;cursor:pointer}
+.btn.s{background:var(--card);color:var(--tx);border:2px solid var(--ln)}
+.btn.g{background:var(--ok);color:#fff}
+.msg{min-height:26px;margin:10px 0 0;font-weight:700}
+.msg.ok{color:var(--ok)}.msg.no{color:var(--no)}
+.win{display:none;border-color:var(--ok);background:var(--okbg);animation:pop .4s}
+.win.on{display:block}
+@keyframes pop{from{transform:scale(.94);opacity:0}}
+.ans{display:grid;gap:6px;margin:8px 0}
+.ans div{background:var(--card);border-radius:12px;padding:8px 12px}
+@media (prefers-reduced-motion:reduce){.bad,.win{animation:none}}
+.tabs+.tabs{margin-top:8px}
+.tb{background:var(--ac);color:#14213d;border-radius:16px;padding:10px 16px;margin-bottom:14px;font:800 20px/1.3 "Baloo 2",system-ui,sans-serif;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;align-items:center}
+.tb small{font:700 14px Nunito,system-ui,sans-serif}
+details summary{cursor:pointer;font:800 18px "Baloo 2",system-ui,sans-serif}
+@media (min-width:900px){body{font-size:19px}main{max-width:1440px}#play:not([hidden]){display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:16px;align-items:start}.tb,#how,#wn{grid-column:1/-1}.cell{width:84px;height:84px;font-size:40px}th{min-width:84px;font-size:16px}.e{font-size:34px}th.r{font-size:19px}}
+
+.gr{border-collapse:separate;border-spacing:4px}
+.gr td{width:58px;height:58px;border-radius:12px;background:var(--card);border:2px solid var(--ln);text-align:center;font-size:28px;padding:0}
+.gr td.ob{background:#e5c79b}.gr td.fn{background:var(--okbg);border-color:var(--ok)}
+.gr td small{font:800 11px Nunito,system-ui,sans-serif;color:var(--mu)}
+.rb{position:relative;display:inline-block}
+.rb i{position:absolute;right:-10px;top:-10px;font-style:normal;font-size:14px;line-height:20px;width:20px;height:20px;border-radius:50%;background:var(--pr);color:#fff;transition:transform .2s;text-align:center}
+.pg{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;align-items:center}
+.pc{min-width:56px;height:52px;border-radius:12px;border:2px solid var(--ln);background:var(--card);color:var(--tx);font:800 18px Nunito,system-ui,sans-serif;cursor:pointer;padding:0 12px}
+.pc.sel{outline:4px solid var(--ac)}.pc.bad{border-color:var(--no);background:var(--nobg)}.pc.em{border-style:dashed;color:var(--mu);font-size:14px}
+.sl{display:grid;gap:8px;margin:8px 0;padding:0;list-style:none}
+.sl button{width:100%;text-align:left;min-height:52px;border-radius:12px;border:2px dashed var(--ln);background:var(--bg);color:var(--tx);font:700 17px Nunito,system-ui,sans-serif;padding:8px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
+.sl button.bad{border-color:var(--no);background:var(--nobg)}
+.sl b{flex:0 0 30px;height:30px;border-radius:50%;background:var(--pr);color:#fff;display:grid;place-items:center}
+.bk{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.bk button{border:2px solid var(--ln);background:var(--card);color:var(--tx);border-radius:12px;padding:10px 14px;font:700 17px Nunito,system-ui,sans-serif;cursor:pointer}
+.lb{font:800 15px "Baloo 2",system-ui,sans-serif;margin:10px 0 2px;color:var(--mu)}
+@media (min-width:900px){.gr td{width:84px;height:84px;font-size:38px}.pc{height:60px;font-size:22px}}
+
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.brand .sub{color:#c9d6ee;font-weight:600;font-size:14px}
+.seg{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.map{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.lv{text-align:left;border:2px solid var(--ln);background:var(--card);color:var(--tx);border-radius:18px;padding:14px;cursor:pointer;font:700 16px/1.4 Nunito,system-ui,sans-serif}
+.lv:disabled{opacity:.5;cursor:not-allowed}.lv:focus-visible,.seg button:focus-visible{outline:3px solid var(--pr);outline-offset:2px}
+.lv h3{font:800 20px/1.2 "Baloo 2",system-ui,sans-serif;margin:4px 0}
+.lv .n{display:inline-block;background:var(--ac);color:#14213d;border-radius:10px;padding:0 10px;font:800 14px "Baloo 2",system-ui,sans-serif}
+.lv .st{font-size:14px;color:var(--mu);font-weight:700}
+.dots i{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--ln);margin:6px 4px 0 0}.dots i.on{background:var(--ok)}
+select,input[type=text]{font:700 16px Nunito,system-ui,sans-serif;padding:10px 12px;border-radius:12px;border:2px solid var(--ln);background:var(--card);color:var(--tx);max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>
+<div class="brand"><h1>Alur</h1><span class="sub">Algoritma · Logika · Uji · Rancang</span></div>
+<div class="tabs" id="vt" role="tablist" aria-label="Versi" hidden></div>
+<div class="tabs" id="tabs" role="tablist" aria-label="Misi" hidden></div>
+</header>
+<main>
+<section id="home"></section>
+<section id="play" hidden>
+<div class="tb" id="tb" aria-live="polite"></div>
+<details class="card" id="how"></details>
+<section class="card" id="cl"><h2 id="pt"></h2><p class="mu" id="ps"></p></section>
+<section class="card" id="gd"><div id="bd"></div>
+<div class="bar">
+<button class="btn g" id="bc">Cek</button>
+<button class="btn s" id="bh">💡 Petunjuk</button>
+<button class="btn s" id="br">🔄 Ulangi</button>
+<button class="btn s" id="bt">↔️ Tukar versi</button>
+</div>
+<p class="msg" id="mg" aria-live="polite"></p></section>
+<section class="card win" id="wn"><h2>🎉 Hebat, misi selesai!</h2><div class="ans" id="an"></div><button class="btn" id="bn"></button></section>
+</section>
+</main>
+<script>var DR=[[-1,0],[0,1],[1,0],[0,-1]],IC={F:"⬆ Maju",L:"↰ Kiri",R:"↱ Kanan"};
+function tr(g,v){var R=g.map(function(x){return x.split("")});if(v==1)R=R.map(function(r){return r.slice().reverse()});if(v==2)R=R.slice().reverse().map(function(r){return r.slice().reverse()});return {g:R,d:v==2?2:0}}
+function at(g,c){for(var r=0;r<g.length;r++)for(var k=0;k<g[r].length;k++)if(g[r][k]==c)return [r,k]}
+function mv(g,p,ch){var r=p[0],c=p[1],d=p[2];if(ch=="L")return [r,c,(d+3)%4];if(ch=="R")return [r,c,(d+1)%4];var nr=r+DR[d][0],nc=c+DR[d][1];if(nr<0||nc<0||nr>=g.length||nc>=g[0].length||g[nr][nc]=="#")return null;return [nr,nc,d]}
+function sim(g,p,prog){var x=p;for(var i=0;i<prog.length;i++){x=mv(g,x,prog[i]);if(!x)return {ok:0,at:i}}var f=at(g,"F");return {ok:x[0]==f[0]&&x[1]==f[1]?1:0,at:prog.length}}
+function bfs(g,p){var f=at(g,"F"),q=[[p[0],p[1],p[2],0]],seen={};seen[p.join()]=1;while(q.length){var x=q.shift();if(x[0]==f[0]&&x[1]==f[1])return x[3];["F","L","R"].forEach(function(ch){var y=mv(g,x,ch);if(y&&!seen[y.join()]){seen[y.join()]=1;q.push([y[0],y[1],y[2],x[3]+1])}})}return -1}
+function gh(g,rb){var h='<div class="sc"><table class="gr">';g.forEach(function(row,r){h+='<tr>';row.forEach(function(ch,c){var x='',k='';if(ch=="#"){k="ob";x="📦"}else if(ch=="F"){k="fn";x="🏁"}else if(ch=="S")x="<small>START</small>";if(rb[0]==r&&rb[1]==c)x='<span class="rb">🤖<i style="transform:rotate('+(rb[2]*90)+'deg)">▲</i></span>';h+='<td class="'+k+'">'+x+'</td>'});h+='</tr>'});return h+'</table></div>'}
+function run(p,s,k){if(s.run)return;var g=p.t.g,i=0;s.rb=p.st.slice();s.run=1;s.bad=-1;rd();var tm=setInterval(function(){if(s.stop){clearInterval(tm);return}
+if(i>=s.prog.length){clearInterval(tm);s.run=0;var f=at(g,"F"),w=s.rb[0]==f[0]&&s.rb[1]==f[1];fin(k,w?"Robot sampai di FINIS. Kasus selesai!":"Robot berhenti sebelum FINIS. Periksa langkah terakhirnya.",w?"ok":"no",w);return}
+var y=mv(g,s.rb,s.prog[i]);if(!y){clearInterval(tm);s.run=0;s.bad=i;fin(k,"Robot menabrak atau keluar petak pada langkah "+(i+1)+". Itu tempat bug-nya!","no",0);return}s.rb=y;i++;rd()},500)}
+
+var SL=(function(){var MT=["Misi 1: Urutan Benda","Misi 2: Urutan Lebih Panjang","Misi 3: Robot di Lantai Berpetak","Misi 4: Kartu Paling Hemat"];
+var H=[["Mulai dari pertanyaan: apa yang harus ada lebih dulu sebelum robot bisa dipakai?","Cari langkah yang pasti pertama dan yang pasti terakhir, lalu isi bagian tengahnya.","Kalau satu langkah dipindah, apakah langkah sesudahnya masih bisa dikerjakan?"],
+["Cari langkah yang pasti pertama dan yang pasti terakhir, lalu isi bagian tengahnya.","Tanyakan: apa yang harus sudah selesai sebelum langkah ini?","Kalau urutanmu berbeda dari teman, jelaskan alasannya satu per satu."],
+["Hitung dulu: robot menghadap ke mana, dan berapa petak sampai belokan?","Kiri dan Kanan dihitung dari sudut pandang robot, bukan sudut pandangmu.","Jalankan sebagian program dulu, lihat robot berhenti di mana, lalu lanjutkan."],
+["Cari jalur dengan belokan paling sedikit.","Hitung jumlah petak lurus, bukan hanya jumlah belokan.","Bandingkan dua jalur: mana yang kartunya lebih sedikit?"]];
+var O=[[{s:"Tujuan: menyalakan lampu robot.",a:["Pasang baterai ke robot","Tutup penutup baterai","Tekan tombol hidup","Lihat lampu menyala"],p:[2,0,3,1]},
+{s:"Tujuan: memasang roda robot.",a:["Pasang poros ke badan robot","Pasang roda pada poros","Kencangkan baut roda","Putar roda untuk memeriksa"],p:[1,3,0,2]},
+{s:"Tujuan: membaca jarak dengan sensor.",a:["Pasang sensor di depan robot","Sambungkan kabel sensor","Nyalakan robot","Baca angka jarak di layar"],p:[3,0,2,1]}],
+[{s:"Tujuan: menyiapkan robot sebelum lomba.",a:["Periksa kabel dan roda","Pasang baterai penuh","Letakkan robot di garis start","Tekan tombol hidup","Tunggu lampu hijau menyala","Lepaskan tangan dari robot"],p:[3,5,1,0,4,2]},
+{s:"Tujuan: mencatat cahaya dengan sensor.",a:["Pasang sensor cahaya","Sambungkan sensor ke papan","Unggah program ke papan","Nyalakan robot","Arahkan sensor ke lampu","Catat angka yang tampil"],p:[4,0,5,2,1,3]},
+{s:"Tujuan: menyiapkan robot penyapu.",a:["Rakit badan robot","Pasang motor","Pasang sikat di depan","Sambungkan baterai","Uji putaran motor","Letakkan robot di lantai"],p:[2,5,0,4,1,3]}]];
+var G3=["..F.",".#..",".#..","S..."],G4=["....F",".###.","..#..",".#...","S..#."];
+function P(m,v){if(m<2)return O[m][v];var t=tr(m==2?G3:G4,v),a=at(t.g,"S"),st=[a[0],a[1],t.d],mn=bfs(t.g,st),cap=mn+(m==2?4:2);
+return {s:m==2?"Bawa robot dari START ke FINIS dengan kartu perintah. Hindari kardus. Kiri dan Kanan dihitung dari sudut pandang robot.":"Kartunya terbatas: hanya "+cap+" kartu. Cari urutan yang paling hemat!",t:t,st:st,mn:mn,cap:cap}}
+function init(p){return p.a?{sl:p.a.map(function(){return -1}),bad:[]}:{prog:[],rb:null,run:0,bad:-1}}
+function view(p,s){
+if(p.a)return '<p class="lb">Susun langkahnya. Ketuk kartu di bawah untuk mengisi, ketuk kotak untuk mengosongkan.</p><ol class="sl">'+p.a.map(function(_,i){var c=s.sl[i];return '<li><button data-sl="'+i+'" class="'+(s.bad.indexOf(i)>-1?'bad':'')+'"><b>'+(i+1)+'</b><span>'+(c<0?'Langkah '+(i+1)+' ...':p.a[c])+'</span></button></li>'}).join("")+'</ol><p class="lb">Kartu langkah:</p><div class="bk">'+p.p.filter(function(c){return s.sl.indexOf(c)<0}).map(function(c){return '<button data-bk="'+c+'">'+p.a[c]+'</button>'}).join("")+'</div>';
+return gh(p.t.g,s.rb||p.st)+'<p class="lb">Programmu ('+s.prog.length+' dari '+p.cap+' kartu). Ketuk kartu untuk menghapusnya.</p><div class="pg">'+(s.prog.length?s.prog.map(function(c,i){return '<button class="pc'+(s.bad==i?' bad':'')+'" data-pi="'+i+'">'+(i+1)+'. '+IC[c]+'</button>'}).join(""):'<span class="mu">Belum ada kartu.</span>')+'</div><p class="lb">Tambah kartu:</p><div class="pg">'+["F","L","R"].map(function(c){return '<button class="pc" data-ch="'+c+'">'+IC[c]+'</button>'}).join("")+'</div>'}
+function tap(e,p,s){var b=e.target.closest("button");if(!b)return;var d=b.dataset;
+if(p.a){if(d.sl!==undefined&&s.sl[+d.sl]>-1){s.sl[+d.sl]=-1;s.bad=[];return 1}if(d.bk!==undefined){var i=s.sl.indexOf(-1);if(i>-1){s.sl[i]=+d.bk;s.bad=[];return 1}}return}
+if(d.ch&&s.prog.length<p.cap){s.prog.push(d.ch);s.rb=null;s.bad=-1;return 1}
+if(d.pi!==undefined){s.prog.splice(+d.pi,1);s.rb=null;s.bad=-1;return 1}}
+function go(p,s,k){
+if(p.a){if(s.sl.indexOf(-1)>-1){fin(k,"Isi semua langkah dulu. Masih ada kotak kosong.","no",0);return}
+s.bad=[];s.sl.forEach(function(c,i){if(c!=i)s.bad.push(i)});
+if(s.bad.length)fin(k,"Langkah nomor "+(s.bad[0]+1)+" belum tepat. Tanyakan: apa yang harus sudah selesai sebelum langkah ini?","no",0);else fin(k,"","ok",1);return}
+if(!s.prog.length){fin(k,"Susun dulu kartu programmu.","no",0);return}run(p,s,k)}
+function sum(p,s){if(p.a)return p.a.map(function(t,i){return '<div>'+(i+1)+'. '+t+'</div>'}).join("")+'<div>Coba tukar dua langkah. Apa yang terjadi?</div>';
+return '<div>'+s.prog.map(function(c){return IC[c]}).join(" → ")+'</div><div>Kartu terpakai: '+s.prog.length+'. Terpendek: '+p.mn+(s.prog.length==p.mn?'. Sempurna!':'. Bisakah lebih hemat?')+'</div>'}
+
+return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})(),PB=(function(){var MT=["Misi 1: Belokan Salah","Misi 2: Langkah Hilang","Misi 3: Dua Bug","Misi 4: Tiga Bug"];
+var H=[["Jalankan dulu dan lihat di mana robot berhenti. Itu petunjuk bug.","Tanyakan: robot menghadap ke mana saat salah, dan seharusnya ke mana?","Ubah satu kartu saja, lalu jalankan lagi."],
+["Jalankan dan lihat robot berhenti di petak mana. Apakah ia kurang jalan?","Hitung petak yang harus dilalui, lalu bandingkan dengan jumlah kartu Maju.","Sisipkan kartu di tempat yang kurang."],
+["Ada dua bug. Perbaiki satu per satu, jangan sekaligus.","Setelah satu bug diperbaiki, jalankan lagi. Robot akan gagal di tempat yang baru.","Catat setiap bug di jurnalmu."],
+["Ada tiga bug dari tiga jenis: salah arah, kurang langkah, dan kelebihan langkah.","Perbaiki mulai dari bug yang paling awal mengenai robot.","Jalankan setelah setiap perbaikan dan lihat apa yang berubah."]];
+var B=[[["..F.",".#..",".#..","S..."],"FFFRFF","FFFLFF"],[["...F","..#.",".#..","S..."],"FFFRFFF","FFFRFF"],[["....F",".##..","...#.",".#...","S...."],"FFFFRFFFF","FFFLFFFF"],[["..F..",".#.#.",".#...","...#.","S...."],"FFFFRFF","FFFLFFF"]];
+var NB=["Ada 1 bug (salah arah).","Ada 1 bug (kurang langkah).","Ada 2 bug.","Ada 3 bug."];
+function sw(x){return x.replace(/[LR]/g,function(c){return c=="L"?"R":"L"})}
+function P(m,v){var b=B[m],t=tr(b[0],v),a=at(t.g,"S"),o=v==1?sw(b[1]):b[1],d=v==1?sw(b[2]):b[2];
+return {s:"Program robot ini punya bug. Jalankan, cari kesalahannya, lalu perbaiki sampai robot tiba di FINIS. "+NB[m]+" Jenis bug: salah arah, kurang langkah, kelebihan langkah.",t:t,st:[a[0],a[1],t.d],ok:o,bad:d,cap:o.length+3}}
+function init(p){return {prog:p.bad.split(""),rb:null,run:0,bad:-1,sel:-1,ed:0}}
+function view(p,s){var n=s.prog.length,h=gh(p.t.g,s.rb||p.st)+'<p class="lb">Programmu ('+n+' kartu). Ketuk sebuah kartu untuk mengubahnya.</p><div class="pg">'+s.prog.map(function(c,i){return '<button class="pc'+(s.bad==i?' bad':'')+(s.sel==i?' sel':'')+'" data-pi="'+i+'">'+(i+1)+'. '+IC[c]+'</button>'}).join("")+'<button class="pc em'+(s.sel==n?' sel':'')+'" data-pi="'+n+'">+ akhir</button></div>';
+if(s.sel>-1){var q=function(a){return ["F","L","R"].map(function(c){return '<button class="pc" data-'+a+'="'+c+'">'+IC[c]+'</button>'}).join("")};
+h+='<p class="lb">Kartu terpilih: '+(s.sel<n?'nomor '+(s.sel+1):'posisi akhir')+'</p>'+(s.sel<n?'<div class="pg"><span class="lb">Ganti jadi</span>'+q("rp")+'</div>':'')+'<div class="pg"><span class="lb">Sisipkan sebelum</span>'+q("ins")+'</div>'+(s.sel<n?'<div class="pg"><button class="pc" data-dl="1">Hapus kartu ini</button></div>':'')}
+return h}
+function tap(e,p,s){var b=e.target.closest("button");if(!b)return;var d=b.dataset,n=s.prog.length,ed=0;
+if(d.pi!==undefined){var i=+d.pi;s.sel=s.sel===i?-1:i;return 1}
+if(d.rp&&s.sel>-1&&s.sel<n){s.prog[s.sel]=d.rp;ed=1}
+else if(d.ins&&s.sel>-1&&n<p.cap){s.prog.splice(s.sel,0,d.ins);ed=1}
+else if(d.dl&&s.sel>-1&&s.sel<n){s.prog.splice(s.sel,1);ed=1}
+if(ed){s.ed++;s.sel=-1;s.rb=null;s.bad=-1;return 1}}
+function go(p,s,k){if(!s.prog.length){fin(k,"Programnya kosong. Tambahkan kartu dulu.","no",0);return}s.sel=-1;run(p,s,k)}
+function sum(p,s){return '<div>Salah satu program yang benar: '+p.ok.split("").map(function(c){return IC[c]}).join(" → ")+'</div><div>Jumlah perbaikan yang kamu buat: '+s.ed+'</div><div><b>Jurnal Bug</b> (tulis di buku): 1. Bug apa yang kamu temukan? 2. Apa penyebabnya? 3. Apa perbaikanmu?</div>'}
+
+return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})(),DT=(function(){var K=function(t,a,y,b,g,r,c){return {t:t,v:[a,y,b],f:[[g,r,c]]}};
+var G=function(r,c,a,n){return {r:r,c:c,a:a,n:n}};
+var V=["A","B","C"],MT=["Misi 1: Tiga Pilihan","Misi 2: Tiga Tugas","Misi 3: Empat Pilihan","Misi 4: Warna dan Tugas"];
+var H=[
+["Ketuk petunjuk 1. Baris dan kolom yang perlu dilihat menyala kuning. Beri ✓ pada kotak bergaris kuning tebal.","Satu ✓ membuat baris dan kolomnya otomatis ✗. Sekarang pakai petunjuk 2.","Tinggal satu kotak kosong di tiap baris. Beri ✓!"],
+["Mulai dari petunjuk berlambang ✓ hijau. Itu yang paling pasti.","Sesudah satu ✓ terpasang, lihat baris robot lain. Kotak mana yang masih mungkin?","Robot terakhir mendapat sisa tugas. Cocokkan dengan petunjuk ✗."],
+["Mulai dari petunjuk berlambang ✓ hijau, lalu lanjut ke petunjuk yang menyebut robot yang sama dua kali.","Kalau satu robot sudah ✗ di dua kotak, pilihannya tinggal sedikit. Cek kolom yang sudah terpakai.","Kerjakan baris yang pilihannya paling sedikit lebih dulu."],
+["Kerjakan Tabel B dulu dari dua petunjuk berlambang ✓ hijau. Sisanya terisi karena tinggal satu pilihan.","Tabel A: robot yang punya dua ✗ pasti memakai warna ketiga.","Robot yang ✗ pada satu tugas pasti bukan warna pemilik tugas itu. Cari warnanya.","Setelah Tabel A dan B terisi, salin hasilnya ke Tabel C."]];
+var D=[
+[{s:"Tiga komponen robot disimpan di tiga kotak. Satu komponen, satu kotak.",g:[G(["🔋 Baterai","⚙️ Motor","📡 Sensor"],["Kotak 1","Kotak 2","Kotak 3"],[1,2,0])],k:[K("Baterai ada di Kotak 2.","🔋 Baterai","✓","Kotak 2",0,0,1),K("Motor tidak ada di Kotak 1.","⚙️ Motor","✗","Kotak 1",0,1,0)]},
+{s:"Tiga komponen robot disimpan di tiga rak. Satu komponen, satu rak.",g:[G(["💡 Lampu","🛞 Roda","🔌 Kabel"],["Rak 1","Rak 2","Rak 3"],[2,0,1])],k:[K("Lampu ada di Rak 3.","💡 Lampu","✓","Rak 3",0,0,2),K("Roda tidak ada di Rak 2.","🛞 Roda","✗","Rak 2",0,1,1)]},
+{s:"Tiga alat bengkel disimpan di tiga laci. Satu alat, satu laci.",g:[G(["🪛 Obeng","🔧 Kunci","🔩 Baut"],["Laci 1","Laci 2","Laci 3"],[0,1,2])],k:[K("Obeng ada di Laci 1.","🪛 Obeng","✓","Laci 1",0,0,0),K("Kunci tidak ada di Laci 3.","🔧 Kunci","✗","Laci 3",0,1,2)]}],
+[{s:"Robo-A, Robo-B, dan Robo-C masing-masing punya satu tugas berbeda.",g:[G(["🤖 Robo-A","🤖 Robo-B","🤖 Robo-C"],["🏗️ Mengangkat","✏️ Menggambar","🧹 Menyapu"],[0,1,2])],k:[K("Robo-A tidak bertugas menyapu.","Robo-A","✗","🧹 Menyapu",0,0,2),K("Robo-B bertugas menggambar.","Robo-B","✓","✏️ Menggambar",0,1,1),K("Robo-C tidak bertugas mengangkat.","Robo-C","✗","🏗️ Mengangkat",0,2,0)]},
+{s:"Robo-P, Robo-Q, dan Robo-R masing-masing punya satu tugas berbeda.",g:[G(["🤖 Robo-P","🤖 Robo-Q","🤖 Robo-R"],["📦 Memindah","🔦 Menerangi","🔔 Memberi tanda"],[2,0,1])],k:[K("Robo-P tidak bertugas menerangi.","Robo-P","✗","🔦 Menerangi",0,0,1),K("Robo-Q bertugas memindah.","Robo-Q","✓","📦 Memindah",0,1,0),K("Robo-R tidak memberi tanda.","Robo-R","✗","🔔 Memberi tanda",0,2,2)]},
+{s:"Robo-S, Robo-T, dan Robo-U masing-masing punya satu tugas berbeda.",g:[G(["🤖 Robo-S","🤖 Robo-T","🤖 Robo-U"],["🚚 Mengantar","🧽 Membersihkan","📷 Memotret"],[1,2,0])],k:[K("Robo-S tidak bertugas mengantar.","Robo-S","✗","🚚 Mengantar",0,0,0),K("Robo-T bertugas memotret.","Robo-T","✓","📷 Memotret",0,1,2),K("Robo-U tidak bertugas membersihkan.","Robo-U","✗","🧽 Membersihkan",0,2,1)]}],
+[{s:"Empat robot memakai empat sensor berbeda. Petunjuk “tidak” juga membantu mencoret.",g:[G(["🤖 Alfa","🤖 Beta","🤖 Gama","🤖 Delta"],["💡 Cahaya","🌡️ Suhu","📏 Jarak","🔊 Suara"],[2,1,0,3])],k:[K("Alfa memakai sensor Jarak.","Alfa","✓","📏 Jarak",0,0,2),K("Beta tidak memakai sensor Suara.","Beta","✗","🔊 Suara",0,1,3),K("Beta juga tidak memakai sensor Cahaya.","Beta","✗","💡 Cahaya",0,1,0),K("Gama tidak memakai sensor Suara.","Gama","✗","🔊 Suara",0,2,3),K("Delta tidak memakai sensor Cahaya.","Delta","✗","💡 Cahaya",0,3,0)]},
+{s:"Empat mobil robot memakai empat sumber tenaga berbeda.",g:[G(["🤖 Mobil-1","🤖 Mobil-2","🤖 Mobil-3","🤖 Mobil-4"],["🔋 Baterai","☀️ Surya","🔌 Kabel","⛽ Bensin"],[1,0,3,2])],k:[K("Mobil-3 memakai Bensin.","Mobil-3","✓","⛽ Bensin",0,2,3),K("Mobil-1 tidak memakai Kabel.","Mobil-1","✗","🔌 Kabel",0,0,2),K("Mobil-1 juga tidak memakai Baterai.","Mobil-1","✗","🔋 Baterai",0,0,0),K("Mobil-2 tidak memakai Kabel.","Mobil-2","✗","🔌 Kabel",0,1,2),K("Mobil-4 tidak memakai Baterai.","Mobil-4","✗","🔋 Baterai",0,3,0)]},
+{s:"Empat robot balap melaju di empat lintasan berbeda.",g:[G(["🤖 Robo-K","🤖 Robo-L","🤖 Robo-M","🤖 Robo-N"],["🪵 Kayu","⬛ Aspal","🟨 Pasir","🧱 Bata"],[3,0,1,2])],k:[K("Robo-K melaju di lintasan Bata.","Robo-K","✓","🧱 Bata",0,0,3),K("Robo-N tidak melaju di Kayu.","Robo-N","✗","🪵 Kayu",0,3,0),K("Robo-N juga tidak melaju di Aspal.","Robo-N","✗","⬛ Aspal",0,3,1),K("Robo-L tidak melaju di Aspal.","Robo-L","✗","⬛ Aspal",0,1,1),K("Robo-M tidak melaju di Kayu.","Robo-M","✗","🪵 Kayu",0,2,0)]}],
+[{s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-X","🤖 Robo-Y","🤖 Robo-Z"],["🔴 Merah","🔵 Biru","🟡 Kuning"],[2,0,1],"Tabel A: Robot dan Warna"),G(["🔴 Merah","🔵 Biru","🟡 Kuning"],["🏗️ Mengangkat","✏️ Menggambar","🧹 Menyapu"],[1,0,2],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-X","🤖 Robo-Y","🤖 Robo-Z"],["🏗️ Mengangkat","✏️ Menggambar","🧹 Menyapu"],[2,1,0],"Tabel C: Robot dan Tugas")],k:[K("Robot merah bertugas menggambar.","🔴 Merah","✓","✏️ Menggambar",1,0,1),K("Robo-X bukan robot biru.","Robo-X","✗","🔵 Biru",0,0,1),K("Robo-X juga bukan robot merah.","Robo-X","✗","🔴 Merah",0,0,0),K("Robot kuning bertugas menyapu.","🟡 Kuning","✓","🧹 Menyapu",1,2,2),K("Robo-Y tidak bertugas mengangkat.","Robo-Y","✗","🏗️ Mengangkat",2,1,0)]},
+{s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-P","🤖 Robo-Q","🤖 Robo-R"],["🟢 Hijau","🟠 Oranye","🟣 Ungu"],[2,1,0],"Tabel A: Robot dan Warna"),G(["🟢 Hijau","🟠 Oranye","🟣 Ungu"],["🔍 Mengukur","📦 Memindah","🔔 Memberi tanda"],[2,1,0],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-P","🤖 Robo-Q","🤖 Robo-R"],["🔍 Mengukur","📦 Memindah","🔔 Memberi tanda"],[0,1,2],"Tabel C: Robot dan Tugas")],k:[K("Robot oranye bertugas memindah.","🟠 Oranye","✓","📦 Memindah",1,1,1),K("Robo-P bukan robot hijau.","Robo-P","✗","🟢 Hijau",0,0,0),K("Robo-P juga bukan robot oranye.","Robo-P","✗","🟠 Oranye",0,0,1),K("Robot ungu bertugas mengukur.","🟣 Ungu","✓","🔍 Mengukur",1,2,0),K("Robo-Q tidak memberi tanda.","Robo-Q","✗","🔔 Memberi tanda",2,1,2)]},
+{s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-S","🤖 Robo-T","🤖 Robo-U"],["⚪ Putih","⚫ Hitam","🟤 Cokelat"],[1,0,2],"Tabel A: Robot dan Warna"),G(["⚪ Putih","⚫ Hitam","🟤 Cokelat"],["🔧 Merakit","🚚 Mengantar","🧽 Membersihkan"],[1,2,0],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-S","🤖 Robo-T","🤖 Robo-U"],["🔧 Merakit","🚚 Mengantar","🧽 Membersihkan"],[2,1,0],"Tabel C: Robot dan Tugas")],k:[K("Robot putih bertugas mengantar.","⚪ Putih","✓","🚚 Mengantar",1,0,1),K("Robo-S bukan robot putih.","Robo-S","✗","⚪ Putih",0,0,0),K("Robo-S juga bukan robot cokelat.","Robo-S","✗","🟤 Cokelat",0,0,2),K("Robot hitam bertugas membersihkan.","⚫ Hitam","✓","🧽 Membersihkan",1,1,2),K("Robo-T tidak bertugas merakit.","Robo-T","✗","🔧 Merakit",2,1,0)]}]];
+function P(m,v){return D[m][v]}
+function init(p){return {sg:p.g.map(function(g){return g.r.map(function(){return g.c.map(function(){return 0})})}),kd:{},hk:-1,auto:true,bad:[]}}
+function okg(p,s,gi){var g=p.g[gi],x=s.sg[gi];return g.a.every(function(c,r){return x[r][c]==1})&&x.every(function(row,r){return row.every(function(y,c){return y!=1||g.a[r]==c})})}
+function hlc(p,s,g,r,c){var k=p.k[s.hk];if(!k)return "";var o="";k.f.forEach(function(f){if(f[0]==g){if(f[1]==r||f[2]==c)o=" hl";if(f[1]==r&&f[2]==c)o=" hl hl2"}});return o}
+function view(p,s){
+var h='<ol class="k">'+p.k.map(function(c,i){var d=s.kd[i];return '<li tabindex="0" class="'+(d?'dn ':'')+(i==s.hk?'sel':'')+'" data-k="'+i+'"><b>'+(i+1)+'</b><div class="kt"><span>'+c.t+'</span><span class="vz"><i>'+c.v[0]+'</i><u class="'+(c.v[1]=="✓"?'y':'n')+'">'+c.v[1]+'</u><i>'+c.v[2]+'</i></span></div><button class="ck" data-ck="'+i+'">'+(d?'Pakai lagi':'Sudah dipakai')+'</button></li>'}).join("")+'</ol>';
+h+=p.g.map(function(g,gi){var t=(g.n?'<div class="gt">'+g.n+'</div>':'')+'<div class="sc"><table><tr><th></th>'+g.c.map(function(c){var m=c.split(" ");return '<th><span class="e">'+m[0]+'</span>'+m.slice(1).join(" ")+'</th>'}).join("")+'</tr>';
+g.r.forEach(function(r,ri){var m=r.split(" ");t+='<tr><th class="r">'+m[0]+" "+m.slice(1).join(" ")+'</th>';g.c.forEach(function(c,ci){var x=s.sg[gi][ri][ci],b=s.bad.indexOf(gi+"-"+ri+"-"+ci)>-1;t+='<td><button class="cell c'+x+hlc(p,s,gi,ri,ci)+(b?' bad':'')+'" data-g="'+gi+'" data-r="'+ri+'" data-c="'+ci+'" aria-label="'+r+' dan '+c+'">'+["","✓","✗"][x]+'</button></td>'});t+='</tr>'});return t+'</table></div>'}).join("");
+return h+'<div class="bar"><button class="btn s" data-auto="1">Coret otomatis: '+(s.auto?'nyala':'mati')+'</button></div>'}
+function tap(e,p,s){var t=e.target,c;
+if(c=t.closest(".ck")){var i=+c.dataset.ck;s.kd[i]=!s.kd[i];return 1}
+if(c=t.closest(".cell")){var g=+c.dataset.g,r=+c.dataset.r,k=+c.dataset.c,x=s.sg[g],n=(x[r][k]+1)%3;x[r][k]=n;s.bad=[];
+if(n==1&&s.auto){x[r].forEach(function(y,i){if(i!=k&&!y)x[r][i]=2});x.forEach(function(row,i){if(i!=r&&!row[k])row[k]=2})}
+if(!isDone(key())&&p.g.every(function(_,i){return okg(p,s,i)})){fin(key(),"","ok",1);return 0}return 1}
+if(c=t.closest("[data-auto]")){s.auto=!s.auto;return 1}
+if(c=t.closest("li[data-k]")){var j=+c.dataset.k;s.hk=s.hk===j?-1:j;return 1}}
+function go(p,s,k){var w=[];p.g.forEach(function(g,gi){s.sg[gi].forEach(function(row,r){row.forEach(function(x,c){if((x==1&&g.a[r]!=c)||(x==2&&g.a[r]==c))w.push(gi+"-"+r+"-"+c)})})});s.bad=w;fin(k,w.length?"Ada kotak yang keliru (bergaris merah). Bacakan petunjuknya sekali lagi.":"Belum ada yang salah. Teruskan, kalian di jalur yang benar!",w.length?"no":"ok",0)}
+function sum(p,s){return p.g.map(function(g){return g.a.map(function(c,r){return '<div>'+g.r[r]+' ➜ '+g.c[c]+'</div>'}).join("")}).join("")}
+
+return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})();
+
+var V=["A","B","C"],$=function(i){return document.getElementById(i)};
+var LV=[{n:1,t:"Urutan",s:"Urutan langkah dan memahami masalah",m:"sl"},{n:2,t:"Salah Itu Petunjuk",s:"Menguji dan memperbaiki",m:"pb"},{n:3,t:"Pecah dan Ulangi",s:"Dekomposisi, pola, perulangan"},{n:4,t:"Jika... Maka...",s:"Kondisi dan penalaran",m:"dt"},{n:5,t:"Pilih yang Penting",s:"Abstraksi dan efisiensi"},{n:6,t:"Perancang",s:"Membuat tantangan sendiri"}];
+var ORD=["sl","pb","dt"],NM={sl:"Susun Langkah",pb:"Pemburu Bug",dt:"Detektif Logika"};
+var MODS={sl:SL,pb:PB,dt:DT},HW={"sl":"<p class=\"mu\">Misi 1-2: ketuk kartu langkah agar urutannya benar, lalu tekan <b>Cek</b>. Misi 3-4: pilih kartu Maju, Kiri, Kanan untuk membawa 🤖 dari START ke 🏁 FINIS tanpa menabrak 📦, lalu tekan <b>Jalankan</b>. Kiri dan Kanan dihitung dari sudut pandang robot.</p>","pb":"<p class=\"mu\">Program robot sudah ada, tetapi ada bug. Tekan <b>Jalankan</b> dan lihat di mana robot gagal. Ketuk kartu yang dicurigai lalu ganti, sisipkan, atau hapus. Bug bukan kegagalan, bug adalah petunjuk.</p>","dt":"<p class=\"mu\">Ketuk kotak sekali untuk ✓ (cocok), dua kali untuk ✗ (tidak cocok), tiga kali untuk kosong. Setiap baris dan kolom hanya punya satu ✓. Ketuk petunjuk untuk melihat bagian tabel yang perlu dilihat.</p>"};
+var ST=load(),mod=null,v=0,cur=0,rot=0,S={},DN={},hi={},cache={};
+function load(){var d;try{d=JSON.parse(localStorage.getItem("alur.v1"))}catch(e){}return d&&d.profiles?d:{mode:"kelas",profiles:[],active:null}}
+function save(){try{localStorage.setItem("alur.v1",JSON.stringify(ST))}catch(e){}}
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function profileDataValid(d){if(!d||d.format!=="alur-profiles"||d.version!==1||!Array.isArray(d.profiles))return false;
+var ids=Object.create(null),valid=true;
+d.profiles.forEach(function(p){if(!p||typeof p.id!="string"||!p.id||p.id.length>64||ids[p.id]||typeof p.nama!="string"||!p.nama.trim()||p.nama!==p.nama.trim()||p.nama.length>20||typeof p.v!="number"||p.v%1||p.v<0||p.v>2||!p.done||typeof p.done!="object"||Array.isArray(p.done)){valid=false;return}
+ids[p.id]=1;Object.keys(p.done).forEach(function(id){var a=p.done[id];if(ORD.indexOf(id)<0||!Array.isArray(a)||a.some(function(n,i){return typeof n!="number"||n%1||n<0||n>3||a.indexOf(n)!=i}))valid=false})});
+return valid&&(d.active===null||typeof d.active=="string"&&!!ids[d.active])}
+function profileStatus(t,c){var el=$("profile-msg");if(el){el.textContent=t;el.className="msg "+(c||"")}}
+function exportProfiles(){var data={format:"alur-profiles",version:1,profiles:ST.profiles,active:ST.active},url;
+try{url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));
+var a=document.createElement("a");a.href=url;a.download="alur-profil.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},0);profileStatus("Profil siap disimpan.","ok")}
+catch(e){profileStatus("Ekspor gagal. Coba lagi di peramban ini.","no")}}
+function importProfiles(file){var reader=new FileReader();
+reader.onload=function(){var data;try{data=JSON.parse(reader.result)}catch(e){profileStatus("Berkas tidak valid. Profil tidak berubah.","no");return}
+if(!profileDataValid(data)){profileStatus("Format berkas tidak sesuai. Profil tidak berubah.","no");return}
+if(ST.profiles.length&&!window.confirm("Impor akan mengganti semua profil dan progres di perangkat ini. Lanjutkan?")){profileStatus("Impor dibatalkan. Profil tidak berubah.");return}
+var profiles=data.profiles.map(function(p){var done={};Object.keys(p.done).forEach(function(id){done[id]=p.done[id].slice()});return{id:p.id,nama:p.nama,v:p.v,done:done}});
+var next={mode:ST.mode,profiles:profiles,active:data.active};
+try{localStorage.setItem("alur.v1",JSON.stringify(next))}catch(e){profileStatus("Profil tidak dapat disimpan. Ruang penyimpanan mungkin penuh.","no");return}
+ST=next;home();profileStatus("Profil dan progres berhasil diimpor.","ok")};
+reader.onerror=function(){profileStatus("Berkas tidak dapat dibaca. Profil tidak berubah.","no")};
+reader.readAsText(file)}
+function prof(){return ST.profiles.filter(function(p){return p.id==ST.active})[0]||null}
+function full(id){var p=prof();return !!(p&&p.done[id]&&p.done[id].length>=4)}
+function locked(id){if(ST.mode!="mandiri")return false;if(!prof())return true;var i=ORD.indexOf(id);return i>0&&!full(ORD[i-1])}
+function key(){return v*4+cur}
+function ch(i){return (i+rot)%3+1}
+function isDone(k){return !!DN[mod.id+":"+k]}
+function pz(){var k=mod.id+":"+key();return cache[k]||(cache[k]=mod.P(cur,v))}
+function st(){var k=mod.id+":"+key();return S[k]||(S[k]=mod.init(pz()))}
+function msg(t,c){$("mg").textContent=t;$("mg").className="msg "+(c||"")}
+function rd(){if(mod)draw()}
+function fin(k,t,c,w){if(k==key())msg(t,c);if(w){DN[mod.id+":"+k]=1;if(ST.mode=="mandiri"&&prof()){var a=prof().done[mod.id]=prof().done[mod.id]||[];if(a.indexOf(k%4)<0)a.push(k%4);save()}}draw();if(w&&k==key())$("wn").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function home(){var p=prof(),m=ST.mode,h='<div class="card"><h2>Mode</h2><div class="seg"><button class="btn'+(m=="kelas"?'':' s')+'" data-md="kelas">Mode Kelas</button><button class="btn'+(m=="mandiri"?'':' s')+'" data-md="mandiri">Mode Mandiri</button></div><p class="mu">'+(m=="kelas"?"Satu perangkat di proyektor, anak maju bergiliran dengan 3 versi soal. Semua level terbuka.":"Siswa mengerjakan jalurnya sendiri di dalam kelas. Level dan misi terbuka satu per satu.")+'</p>';
+if(m=="mandiri"){h+='<p class="lb">Siapa yang bermain?</p><div class="seg">'+(ST.profiles.length?'<select id="pf" aria-label="Pilih siswa">'+ST.profiles.map(function(x){return '<option value="'+x.id+'"'+(x.id==ST.active?' selected':'')+'>'+esc(x.nama)+'</option>'}).join("")+'</select>':'')+'<input type="text" id="pn" maxlength="20" placeholder="Nama panggilan" aria-label="Nama panggilan"><button class="btn" id="pa">Tambah siswa</button></div>'+(p?'<p class="mu">Versi soal untuk siswa ini: <b>'+V[p.v]+'</b></p>':'<p class="mu">Tambahkan siswa dulu untuk mulai.</p>')+'<div class="seg"><button class="btn s" id="pe">Ekspor profil</button><button class="btn s" id="pi">Impor profil</button><input type="file" id="profile-file" accept="application/json,.json" hidden></div><p class="mu" id="profile-msg" aria-live="polite"></p>'}
+h+='</div><div class="map">'+LV.map(function(l){var off=!l.m||locked(l.m),d=(l.m&&p&&m=="mandiri")?(p.done[l.m]||[]):[];
+return '<button class="lv" data-lv="'+(l.m||"")+'"'+(off?' disabled':'')+'><span class="n">Level '+l.n+'</span><h3>'+l.t+'</h3><div>'+l.s+'</div><div class="st">'+(l.m?NM[l.m]+(locked(l.m)?' · terkunci':' · tersedia'):'Segera hadir')+'</div>'+(l.m?'<div class="dots" aria-label="Misi selesai">'+[0,1,2,3].map(function(i){return '<i class="'+(d.indexOf(i)>-1?'on':'')+'"></i>'}).join("")+'</div>':'')+'</button>'}).join("")+'</div>';
+$("home").innerHTML=h;show(0)}
+function show(p){$("home").hidden=!!p;$("play").hidden=!p;$("vt").hidden=!p||ST.mode!="kelas";$("tabs").hidden=!p;if(!p)mod=null}
+function openMod(id){mod=MODS[id];mod.id=id;var p=prof();DN={};S={};hi={};cur=0;rot=0;
+if(ST.mode=="mandiri"&&p){v=p.v;(p.done[id]||[]).forEach(function(m){DN[id+":"+(v*4+m)]=1});while(cur<3&&isDone(v*4+cur))cur++}else v=0;
+$("how").innerHTML='<summary>Cara bermain</summary>'+HW[id]+(ST.mode=="kelas"?'<p class="mu"><b>Aturan penonton:</b> boleh membacakan dan menjelaskan, tetapi jangan menyebut jawabannya. Anak di depan baru mengetuk setelah penonton sepakat.</p>':'');
+$("bc").textContent=id=="sl"?"Cek / Jalankan":id=="pb"?"Jalankan":"Cek jawaban";$("bt").hidden=ST.mode!="kelas";show(1);msg("");draw();window.scrollTo(0,0)}
+function bars(){var k=ST.mode=="kelas";
+$("vt").innerHTML=V.map(function(n,i){return '<button class="tab'+(i==v?' on':'')+(isDone(i*4+cur)?' dn':'')+'" role="tab" data-v="'+i+'">Anak '+ch(i)+' · Versi '+n+'</button>'}).join("");
+$("tabs").innerHTML=mod.MT.map(function(n,i){var lk=!k&&i>0&&!isDone(v*4+i-1);return '<button class="tab'+(i==cur?' on':'')+(isDone(v*4+i)?' dn':'')+'" role="tab" data-i="'+i+'"'+(lk?' disabled':'')+'>Misi '+(i+1)+'</button>'}).join("");
+$("tb").innerHTML='<span>'+(k?'Giliran: Anak '+ch(v)+' · Versi '+V[v]:(prof()?esc(prof().nama)+' · Versi '+V[v]:''))+' · '+NM[mod.id]+'</span><button class="btn s" id="bk">← Peta level</button>'}
+function draw(){if(!mod)return;var p=pz(),s=st();$("pt").textContent=mod.MT[cur]+" (Versi "+V[v]+")";$("ps").textContent=p.s||"";$("bd").innerHTML=mod.view(p,s);
+if(isDone(key())){$("an").innerHTML=mod.sum(p,s);var nb=$("bn");nb.style.display="";
+if(ST.mode=="kelas"){if(v<2)nb.textContent="Giliran Anak "+ch(v+1)+" · Versi "+V[v+1];else if(cur<3)nb.textContent="Misi berikutnya · mulai Anak "+ch(0)+" · Versi A";else nb.style.display="none"}
+else nb.textContent=cur<3?"Misi berikutnya":"Kembali ke peta level";
+$("wn").classList.add("on")}else $("wn").classList.remove("on");bars()}
+$("home").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+if(b.dataset.md){ST.mode=b.dataset.md;save();home();return}
+if(b.id=="pa"){var n=$("pn").value.trim().slice(0,20);if(!n)return;var id=Date.now().toString(36);ST.profiles.push({id:id,nama:n,v:ST.profiles.length%3,done:{}});ST.active=id;save();home();return}
+if(b.id=="pe"){exportProfiles();return}
+if(b.id=="pi"){$("profile-file").click();return}
+if(b.dataset.lv)openMod(b.dataset.lv)});
+$("home").addEventListener("change",function(e){if(e.target.id=="pf"){ST.active=e.target.value;save();home()}});
+$("home").addEventListener("change",function(e){if(e.target.id=="profile-file"&&e.target.files&&e.target.files[0])importProfiles(e.target.files[0])});
+$("tb").addEventListener("click",function(e){if(e.target.closest("#bk"))home()});
+$("bd").addEventListener("click",function(e){var p=pz(),s=st();if(s.run)return;if(mod.tap(e,p,s)){msg("");draw()}});
+$("bd").addEventListener("keydown",function(e){if((e.key=="Enter"||e.key==" ")&&e.target.tagName=="LI"){e.preventDefault();e.target.click()}});
+$("bc").onclick=function(){var s=st();if(s.run)return;mod.go(pz(),s,key())};
+$("bh").onclick=function(){var h=mod.H[cur],k=mod.id+":"+key(),i=hi[k]||0;msg("💡 "+h[i%h.length]);hi[k]=i+1};
+$("br").onclick=function(){var k=mod.id+":"+key();if(S[k])S[k].stop=1;S[k]=null;delete DN[k];draw();msg("")};
+$("bt").onclick=function(){for(var k in S)if(S[k])S[k].stop=1;rot=(rot+1)%3;S={};DN={};hi={};v=0;cur=0;draw();msg("Putaran tukar: setiap anak kini mendapat versi yang berbeda dari sebelumnya.","ok")};
+$("bn").onclick=function(){if(ST.mode=="mandiri"){if(cur<3){cur++;draw();msg("");window.scrollTo({top:0,behavior:"smooth"})}else home();return}if(v<2)v++;else{v=0;cur++}draw();msg("");window.scrollTo({top:0,behavior:"smooth"})};
+$("tabs").addEventListener("click",function(e){var b=e.target.closest(".tab");if(b&&!b.disabled){cur=+b.dataset.i;draw();msg("")}});
+$("vt").addEventListener("click",function(e){var b=e.target.closest(".tab");if(b){v=+b.dataset.v;draw();msg("")}});
+home();
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")==0){navigator.serviceWorker.register("sw.js").catch(function(){})}
+</script>
+</body>
+</html>

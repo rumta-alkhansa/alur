@@ -1,0 +1,14 @@
+{
+  "name": "alur",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Alur: app belajar algoritma, logika, uji, dan rancang untuk SD kelas 4-6",
+  "scripts": {
+    "build": "node tools/build.js",
+    "test": "npm run build && node tests/verify-puzzles.js && node tests/smoke.js",
+    "serve": "npm run build && node tools/serve.js"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3"
+  }
+}

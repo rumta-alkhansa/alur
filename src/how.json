@@ -1,0 +1,5 @@
+{
+ "sl": "<p class=\"mu\">Misi 1-2: ketuk kartu langkah agar urutannya benar, lalu tekan <b>Cek</b>. Misi 3-4: pilih kartu Maju, Kiri, Kanan untuk membawa 🤖 dari START ke 🏁 FINIS tanpa menabrak 📦, lalu tekan <b>Jalankan</b>. Kiri dan Kanan dihitung dari sudut pandang robot.</p>",
+ "pb": "<p class=\"mu\">Program robot sudah ada, tetapi ada bug. Tekan <b>Jalankan</b> dan lihat di mana robot gagal. Ketuk kartu yang dicurigai lalu ganti, sisipkan, atau hapus. Bug bukan kegagalan, bug adalah petunjuk.</p>",
+ "dt": "<p class=\"mu\">Ketuk kotak sekali untuk ✓ (cocok), dua kali untuk ✗ (tidak cocok), tiga kali untuk kosong. Setiap baris dan kolom hanya punya satu ✓. Ketuk petunjuk untuk melihat bagian tabel yang perlu dilihat.</p>"
+}
