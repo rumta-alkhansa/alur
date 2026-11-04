@@ -1,5 +1,8 @@
 {
  "sl": "<p class=\"mu\">Misi 1-2: ketuk kartu langkah agar urutannya benar, lalu tekan <b>Cek</b>. Misi 3-4: pilih kartu Maju, Kiri, Kanan untuk membawa 🤖 dari START ke 🏁 FINIS tanpa menabrak 📦, lalu tekan <b>Jalankan</b>. Kiri dan Kanan dihitung dari sudut pandang robot.</p>",
  "pb": "<p class=\"mu\">Program robot sudah ada, tetapi ada bug. Tekan <b>Jalankan</b> dan lihat di mana robot gagal. Ketuk kartu yang dicurigai lalu ganti, sisipkan, atau hapus. Bug bukan kegagalan, bug adalah petunjuk.</p>",
- "dt": "<p class=\"mu\">Ketuk kotak sekali untuk ✓ (cocok), dua kali untuk ✗ (tidak cocok), tiga kali untuk kosong. Setiap baris dan kolom hanya punya satu ✓. Ketuk petunjuk untuk melihat bagian tabel yang perlu dilihat.</p>"
+ "pu": "<p class=\"mu\">Misi 1: pilih langkah, lalu tempatkan dalam tugas kecil. Misi 2: cari ubin yang meneruskan pola. Misi 3: susun kartu perintah dan coba blok ulangi. Misi 4: bandingkan jumlah kartu pada tiga jalur dan pilih alasanmu.</p>",
+ "dt": "<p class=\"mu\">Ketuk kotak sekali untuk ✓ (cocok), dua kali untuk ✗ (tidak cocok), tiga kali untuk kosong. Setiap baris dan kolom hanya punya satu ✓. Ketuk petunjuk untuk melihat bagian tabel yang perlu dilihat. Setelah misi selesai, coba latihan aturan: pilih aksi untuk kondisi terpenuhi dan tidak terpenuhi, lalu uji.</p>",
+ "ab": "<p class=\"mu\">Misi 1-2: pilih informasi atau benda yang membantu tujuan. Misi 3: susun blok diagram dan cabang Ya/Tidak. Misi 4: baca kondisi, lalu pilih hasil untuk tiap contoh.</p>",
+ "ra": "<p class=\"mu\">Rancang petamu dengan mengetuk petak kosong untuk menaruh penghalang. Jumlah penghalang berbeda di tiap misi. Pastikan robot masih punya jalan ke FINIS, susun kartu perintah, lalu tekan Jalankan. Peta dan program hanya tersedia selama sesi ini.</p>"
 }

@@ -7,7 +7,7 @@ Baca seluruh berkas ini sebelum mengubah apa pun. Ringkasan satu paragraf: **Alu
 2. **Bahasa Indonesia, kalimat pendek**, sesuai anak kelas 4-6. Petunjuk berbentuk pertanyaan atau isyarat, **bukan membuka jawaban**. Teks yang dibaca siswa memakai tanda kutip lengkung dan apostrof ’; sintaks kode tetap tanda lurus.
 3. **Setiap soal wajib lolos `tests/verify-puzzles.js`**: jawaban benar, tunggal (untuk teka-teki), dan tiga versi kembar setara tingkat sulitnya.
 4. **Data siswa hanya nama panggilan di `localStorage` (kunci `alur.v1`).** Jangan menambah data pribadi, akun online, atau pengiriman data keluar.
-5. **Satu berkas `dist/index.html` tanpa library runtime.** Jangan menambah dependensi besar tanpa alasan kuat (proyek hemat biaya). Satu-satunya sumber luar sementara adalah Google Fonts (akan diganti berkas lokal di Fase 1).
+5. **Satu berkas `dist/index.html` tanpa library runtime.** Jangan menambah dependensi besar tanpa alasan kuat (proyek hemat biaya). Font Baloo 2 dan Nunito sekarang disimpan lokal dengan lisensi OFL.
 6. **Tema tidak boleh mengubah mekanik**, dan tema tidak selalu robotika.
 7. **Jangan menaruh nama sekolah di kode atau konten** (direncanakan open source).
 8. **Tidak ada papan peringkat atau kompetisi antarsiswa.** Penghargaan untuk proses, bukan kecepatan.
@@ -34,7 +34,12 @@ src/
   modules/
     susun-langkah.js   Level 1 (id sl)
     pemburu-bug.js     Level 2 (id pb)
-    detektif-logika.js Level 4 sebagian (id dt): data soal + adaptor
+    pecah-dan-ulangi.js Level 3 (id pu): mekanik
+    pecah-dan-ulangi-data.json data 12 soal Level 3
+    detektif-logika.js Level 4 (id dt): data soal + adaptor, termasuk latihan aturan opsional
+    pilih-yang-penting.js Level 5 (id ab): abstraksi dan diagram alur
+    pilih-yang-penting-data.json data 12 soal Level 5
+    perancang.js Level 6 (id ra): pembuat dan penguji peta grid
   shell.js             peta level, profil, mode, navigasi, penyimpanan
   how.json             teks "Cara bermain" per modul
 public/                manifest, service worker, ikon (disalin ke dist)
@@ -46,7 +51,7 @@ dist/                  hasil build (boleh di-commit untuk pratinjau)
 ```
 
 ## 5. Arsitektur
-**Urutan muat** di `dist/index.html`: `engine.js`, lalu modul (masing-masing dibungkus IIFE oleh `tools/build.js` dan diekspos sebagai `SL`, `PB`, `DT`), lalu `shell.js`. Tidak ada modul ES; semua global. Gaya kode: ES5 (`var`, `function`), tanpa transpiler.
+**Urutan muat** di `dist/index.html`: `engine.js`, lalu modul (masing-masing dibungkus IIFE oleh `tools/build.js` dan diekspos sebagai `SL`, `PB`, `PU`, `DT`, `AB`, `RA`), lalu `shell.js`. Data `pu` dan `ab` diinjeksi ke IIFE dari berkas JSON masing-masing. Tidak ada modul ES; semua global. Gaya kode: ES5 (`var`, `function`), tanpa transpiler.
 
 **Kontrak modul.** Setiap modul mengekspor persis: `MT, H, P, init, view, tap, go, sum`.
 | Anggota | Peran |
@@ -66,8 +71,9 @@ dist/                  hasil build (boleh di-commit untuk pratinjau)
 - `ST = {mode:"kelas"|"mandiri", profiles:[{id,nama,v,done:{modId:[indeksMisi]}}], active}`; versi siswa baru = jumlah profil mod 3.
 - Level terkunci di Mode Mandiri bila modul sebelumnya (urutan `ORD`) belum selesai semua 4 misi. Misi terkunci bila misi sebelumnya belum selesai. Di Mode Kelas semuanya terbuka.
 - `openMod()` mereset `S`, `DN`, `hi`; progres Mandiri dipulihkan dari profil.
+- Shell menyediakan animasi konsep yang bisa diputar ulang untuk Level 1-6. Animasi memakai contoh umum, tidak mengambil jawaban soal, dan tidak mengubah progres. Hormati `prefers-reduced-motion`.
 
-**Mesin grid.** Karakter petak: `.` kosong, `#` kardus, `S` start, `F` finis. Arah 0=utara, 1=timur, 2=selatan, 3=barat. Perintah: `F` maju, `L` kiri, `R` kanan (dari sudut pandang robot). `sim` menjalankan program; `bfs` menghitung jumlah kartu terpendek; `run` menganimasikan 500 ms per langkah dan memanggil `fin`.
+**Mesin grid.** Karakter petak: `.` kosong, `#` kardus, `S` start, `F` finis. Arah 0=utara, 1=timur, 2=selatan, 3=barat. Perintah: `F` maju, `L` kiri, `R` kanan (dari sudut pandang robot). `sim` menjalankan program; `bfs` menghitung jumlah kartu terpendek; `expand` membuka blok ulangi menjadi perintah dasar; `run` menganimasikan 500 ms per langkah dan memanggil `fin`.
 
 **Tiga versi kembar.** `tr(grid, v)`: v0 apa adanya (menghadap utara); v1 cermin horizontal (program: tukar L dan R); v2 putar 180 derajat (menghadap selatan, program sama). Untuk soal bukan grid, versi kembar dibuat dengan struktur dan urutan deduksi sama, hanya tema dan posisi jawaban berbeda. Contoh data Detektif: `K(teks, kiri, ✓/✗, kanan, grid, baris, kolom)` mendefinisikan satu petunjuk bergambar sekaligus petak yang disorot.
 
@@ -88,8 +94,8 @@ npm run serve      # http://localhost:8000
 6. Perbarui status di `docs/KURIKULUM.md` dan `docs/ROADMAP.md`.
 
 ## 8. Pengujian dan gerbang kualitas
-- `verify-puzzles.js` memeriksa: kontrak modul lengkap; Susun Langkah (urutan acak valid, jalur terpendek sama antar versi); Pemburu Bug (program benar sampai finis, program bug gagal); Detektif (tepat satu solusi per soal, jawaban tersimpan cocok dengan petunjuk).
-- `smoke.js` menyimulasikan klik: peta level, tiap modul menang, Mode Kelas dan giliran, Mode Mandiri (profil, penguncian, penyimpanan progres).
+- `verify-puzzles.js` memeriksa: kontrak modul lengkap; Susun Langkah (urutan acak valid, jalur terpendek sama antar versi); Pemburu Bug (program benar sampai finis, program bug gagal); Pecah dan Ulangi (12 versi soal, jawaban, ekspansi blok, dan jalur valid); Detektif (tepat satu solusi per soal, jawaban tersimpan cocok dengan petunjuk, simulator aturan benar pada kondisi terpenuhi dan tidak terpenuhi); Pilih yang Penting (12 versi, pilihan abstraksi, struktur diagram, cabang, dan kasus uji kembar); Perancang (empat ukuran tantangan, tiga versi peta, jumlah penghalang dan rute yang bisa diuji).
+- `smoke.js` menyimulasikan klik: peta level, animasi konsep dan putar ulang Level 1-6, penyelesaian modul, Mode Kelas dan giliran, Mode Mandiri (profil, penguncian, penyimpanan progres).
 - Tes **tidak** menggantikan uji layar dan uji kelompok. Gerbang tiap modul: Rancang, Verifikasi otomatis, Uji asap, Uji layar, Uji kelompok 3 anak.
 
 ## 9. Jebakan yang sudah ditemui
@@ -100,18 +106,13 @@ npm run serve      # http://localhost:8000
 - Versi B (cermin) pada soal grid wajib menukar L dan R pada program; lupa menukar membuat soal tak terselesaikan.
 - Verifikasi soal harus berjalan di berkas hasil build, bukan hanya di sumber.
 - Mode Kelas: penonton tidak boleh menyebut jawaban; jangan menambah fitur yang membocorkan jawaban (tombol Petunjuk hanya bertanya balik).
-- Font masih diambil dari internet; tampilan offline memakai font bawaan sampai Fase 1 selesai.
+- Font kini lokal. Service worker menyimpan font, lisensi, dan ikon untuk penggunaan offline.
 
 ## 10. Status dan tugas berikutnya
-**Selesai:** kerangka (peta enam level, profil lokal, dua mode, penyimpanan), Level 1, Level 2, Level 4 sebagian (tabel logika), uji otomatis, PWA dasar (manifest, service worker, ikon sementara).
-**Belum:** uji di proyektor dan perangkat siswa; font lokal; ekspor dan impor profil; hosting HTTPS; Level 3, 5, 6; aturan jika-maka (Level 4); editor tantangan; lisensi; nama dicek ketersediaannya.
+**Selesai:** kerangka (peta enam level, profil lokal, dua mode, penyimpanan), Level 1-5 versi otomatis, simulator aturan Level 4, Level 6 awal (editor peta grid dan uji program), animasi konsep Level 1-6, font lokal, ekspor dan impor profil, ikon final, uji otomatis, PWA dasar.
+**Belum:** uji Level 3-6 dengan kelompok tiga anak; uji di proyektor dan perangkat siswa; hosting HTTPS; editor teka-teki tabel logika; berbagi/ekspor tantangan; lisensi; pemeriksaan merek Alur secara resmi.
 
-**Tugas berikutnya (Fase 1), urut prioritas:**
-1. Tombol **ekspor dan impor profil** (berkas JSON, validasi saat impor, tanpa menimpa tanpa konfirmasi). Terima bila: ekspor lalu impor di peramban lain memulihkan profil dan progres; impor berkas rusak menampilkan pesan dan tidak mengubah data. Tambahkan tes.
-2. **Font lokal**: unduh Baloo 2 dan Nunito (pastikan lisensi OFL dicatat), tanam sebagai berkas di `public/` atau data URI, hapus tautan Google Fonts, perbarui `sw.js`. Terima bila halaman identik saat offline.
-3. **Perbaikan dari uji layar** (menunggu catatan pemilik proyek): ukuran kotak, kontras, area sentuh.
-4. **Ikon final** dan pengecekan nama.
-5. Setelah Fase 1 ditutup: **Level 3** (lihat `docs/ROADMAP.md`, modul id `pu`).
+**Tugas berikutnya:** uji layar/proyektor dan kelompok tiga anak untuk Level 3-6; catat masalah dan lakukan perbaikan. Lanjutkan Level 6 dengan editor tabel logika dan berbagi tantangan setelah editor grid diuji. Lihat gerbang fase di `docs/ROADMAP.md`.
 
 ## 11. Rujukan di luar repositori (konteks, tidak wajib)
 Dokumen sumber ditulis di Claude Docs (rencana ekskul, rancangan app, rencana pengembangan) dan pratinjau di https://claude.ai/artifact/2EEvtj4KMEWv3szU3g8ATo. Isi pentingnya sudah disalin ke `docs/`. Bila ada perbedaan, `AGENTS.md` dan `docs/` yang berlaku.

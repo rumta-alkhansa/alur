@@ -22,15 +22,26 @@ Level 3 harus siap sebelum Unit 3 (semester 2 kelas 5) dipakai.
 7. Sederhanakan kalimat petunjuk yang membingungkan.
 8. Cek ketersediaan nama Alur (repositori dan merek); ikon final.
 
-## Fase 2: Level 3 (modul baru, id `pu`)
-Empat misi: (1) Pecah misi: kelompokkan dan urutkan sub-tugas; (2) Cari pola: lanjutkan barisan ubin atau ritme; (3) Blok ulangi: program grid dengan kartu "ulangi n kali"; (4) Cari jalur: bandingkan 2-3 jalur dengan total langkah, pilih yang hemat beserta alasan.
-Langkah: rancang 4 misi x 3 versi kembar; tulis pemeriksa (jawaban benar, kesetaraan versi); bangun mekanik baru (perluas `engine.js` untuk blok ulangi: ekspansi program sebelum `sim`); daftarkan di shell; perluas `tests/`; pindahkan data soal ke berkas data terpisah; uji kelompok; rilis.
+## Fase 2: Level 3 (modul baru, id `pu`) — implementasi otomatis selesai; gerbang kelas menunggu
+Modul `pecah-dan-ulangi` sudah terdaftar di shell dan build. Data 12 soal ada di `src/modules/pecah-dan-ulangi-data.json`; `engine.js` membuka blok ulangi menjadi perintah dasar sebelum simulasi dan animasi.
 
-## Fase 3
-Mekanik diagram alur; mekanik menyederhanakan; simulator jika-maka untuk Level 4; opsi Mode Kelas menyimpan progres per nama kelas; ekspor ringkasan untuk penilaian guru.
+Empat misi:
+1. **Pecah Tugas:** tempatkan enam langkah ke tiga kelompok tugas kecil dan urutkan.
+2. **Cari Pola:** lanjutkan pola tiga bentuk ubin yang berulang.
+3. **Blok Ulangi:** bawa robot di grid dengan paling banyak tiga kartu, termasuk blok ulangi.
+4. **Jalur Hemat:** bandingkan tiga jalur, pilih jumlah kartu paling sedikit, dan pilih alasan yang sesuai.
 
-## Fase 4
-Editor tantangan (grid dan tabel logika) memakai pemeriksa yang sama; berbagi soal tanpa server lewat berkas atau kode; tata letak cetak buku teka-teki; paket Pekan Algoritma (panduan pos, kartu stempel, rubrik, gladi).
+Pemeriksa otomatis memastikan struktur dan jawaban 12 soal, program ulangi sampai ke FINIS, serta semua jalur valid dan satu jalur paling hemat. Uji asap mencakup alur menang tiap misi. Yang masih wajib sebelum Fase 2 ditutup: uji layar/proyektor dan uji kelompok tiga anak.
+
+## Fase 3 (sedang berjalan)
+Simulator aturan **Jika… Maka…** sudah ditambahkan sebagai latihan opsional setelah tiap misi tabel Level 4; progres empat misi tidak berubah. Level 5 **Pilih yang Penting** sudah dibuat sebagai modul dengan 4 misi dan 12 versi soal: memilih informasi, menyederhanakan peta, menyusun diagram alur bercabang, dan menelusuri diagram pada beberapa kasus. Level 1-6 memiliki animasi konsep yang diputar ulang sesuai permintaan dan terpisah dari jawaban soal. Tes otomatis mencakup puzzle, tiga versi kembar, alur klik, serta tampilan/pemutaran animasi untuk tiap level yang tersedia.
+
+Yang masih wajib: uji Level 4 dan 5 di proyektor/perangkat siswa serta kelompok tiga anak. Opsi Mode Kelas menyimpan progres per nama kelas dan ekspor ringkasan untuk penilaian guru tetap direncanakan.
+
+## Fase 4 (editor grid awal tersedia)
+Level 6 kini memiliki editor peta grid 5 × 5: siswa menaruh jumlah penghalang sesuai misi, menyusun program, lalu menjalankannya untuk menguji START ke FINIS. Empat misi dan tiga versi tersedia. Rancangan belum disimpan atau dibagikan dan uji kelas masih menunggu.
+
+Berikutnya: uji editor grid; buat editor tantangan tabel logika memakai pemeriksa yang sama; tambah berbagi soal tanpa server lewat berkas atau kode; tata letak cetak buku teka-teki; paket Pekan Algoritma (panduan pos, kartu stempel, rubrik, gladi).
 
 ## Fase 5
 Pilih lisensi (kode dan konten soal terpisah); hapus nama sekolah dan aset berlisensi; catat sumber font dan ikon; README, panduan kontribusi, panduan menambah modul; opsional akun dan panel guru dengan penyimpanan bersama.

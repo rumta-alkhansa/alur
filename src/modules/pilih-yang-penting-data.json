@@ -1,0 +1,121 @@
+{
+  "missions": [
+    {
+      "story": "Robot harus mencari paket baterai. Informasi mana yang dibutuhkan?",
+      "options": [
+        "Letak robot sekarang",
+        "Letak rak baterai",
+        "Petak yang terhalang kardus",
+        "Warna dinding",
+        "Jumlah lampu",
+        "Nama pembuat robot"
+      ],
+      "answer": [0, 1, 2]
+    },
+    {
+      "story": "Robot harus mencari kotak lampu. Informasi mana yang dibutuhkan?",
+      "options": [
+        "Jumlah jendela",
+        "Letak robot sekarang",
+        "Bentuk gagang pintu",
+        "Letak lemari lampu",
+        "Warna lantai",
+        "Petak yang terhalang kardus"
+      ],
+      "answer": [1, 3, 5]
+    },
+    {
+      "story": "Robot harus mencari kunci di bengkel. Informasi mana yang dibutuhkan?",
+      "options": [
+        "Warna atap",
+        "Petak yang tertutup rak",
+        "Nama perancang bengkel",
+        "Jumlah kursi",
+        "Letak kotak perkakas",
+        "Letak robot sekarang"
+      ],
+      "answer": [1, 4, 5]
+    }
+  ],
+  "maps": [
+    {
+      "story": "Sederhanakan peta agar robot dapat mengantar paket dari pintu ke rak.",
+      "options": ["Pintu masuk", "Rak tujuan", "Kardus penghalang", "Jam dinding", "Poster", "Warna lantai"],
+      "answer": [0, 1, 2]
+    },
+    {
+      "story": "Sederhanakan peta agar robot dapat membawa alat dari meja ke lemari.",
+      "options": ["Jendela", "Meja awal", "Lemari tujuan", "Lampu atap", "Pola ubin", "Kotak penghalang"],
+      "answer": [1, 2, 5]
+    },
+    {
+      "story": "Sederhanakan peta agar robot dapat bergerak dari gerbang ke bengkel.",
+      "options": ["Warna dinding", "Rak penghalang", "Papan jam", "Bengkel tujuan", "Pot tanaman", "Gerbang awal"],
+      "answer": [1, 3, 5]
+    }
+  ],
+  "flows": [
+    {
+      "story": "Susun diagram untuk memilah paket berdasarkan nomor.",
+      "blocks": ["Mulai", "Baca nomor paket", "Cek: nomor genap?"],
+      "order": [0, 1, 2],
+      "yes": "Rak biru",
+      "no": "Rak kuning",
+      "actions": ["Rak biru", "Rak kuning", "Meja periksa"]
+    },
+    {
+      "story": "Susun diagram untuk memilih jalur berdasarkan roda robot.",
+      "blocks": ["Hitung roda robot", "Mulai", "Cek: jumlah roda genap?"],
+      "order": [1, 0, 2],
+      "yes": "Jalur cepat",
+      "no": "Jalur aman",
+      "actions": ["Tempat servis", "Jalur aman", "Jalur cepat"]
+    },
+    {
+      "story": "Susun diagram untuk memilih kotak berdasarkan kode.",
+      "blocks": ["Cek: kode dua digit?", "Baca kode barang", "Mulai"],
+      "order": [2, 1, 0],
+      "yes": "Kotak lebar",
+      "no": "Kotak kecil",
+      "actions": ["Kotak kecil", "Meja ukur", "Kotak lebar"]
+    }
+  ],
+  "tests": [
+    {
+      "story": "Ikuti diagram. Jalur mana yang dipilih mesin?",
+      "condition": "nomor paket genap?",
+      "yes": "Rak biru",
+      "no": "Rak kuning",
+      "cases": [
+        {"label": "Paket nomor 24", "condition": true},
+        {"label": "Paket nomor 15", "condition": false},
+        {"label": "Paket nomor 8", "condition": true}
+      ],
+      "options": ["Rak biru", "Rak kuning", "Meja periksa"]
+    },
+    {
+      "story": "Ikuti diagram. Jalur mana yang dipilih mesin?",
+      "condition": "jumlah roda genap?",
+      "yes": "Jalur cepat",
+      "no": "Jalur aman",
+      "cases": [
+        {"label": "Robot dengan 4 roda", "condition": true},
+        {"label": "Robot dengan 3 roda", "condition": false},
+        {"label": "Robot dengan 6 roda", "condition": true}
+      ],
+      "options": ["Tempat servis", "Jalur aman", "Jalur cepat"]
+    },
+    {
+      "story": "Ikuti diagram. Jalur mana yang dipilih mesin?",
+      "condition": "kode dua digit?",
+      "yes": "Kotak lebar",
+      "no": "Kotak kecil",
+      "cases": [
+        {"label": "Kode 42", "condition": true},
+        {"label": "Kode 7", "condition": false},
+        {"label": "Kode 18", "condition": true}
+      ],
+      "options": ["Kotak kecil", "Meja ukur", "Kotak lebar"]
+    }
+  ]
+}

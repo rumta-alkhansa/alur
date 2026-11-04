@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Alur</title>
   <rect width="512" height="512" rx="112" fill="#14213d"/>
   <rect x="38" y="38" width="436" height="436" rx="92" fill="#ffc233"/>
-  <path d="M92 404 205 111h61l-95 293zm124-293h61l113 293h-79l-95-261z" fill="#14213d"/>
-  <path d="M167 276h178v58H167z" fill="#14213d"/>
-  <path d="M203 305h105" fill="none" stroke="#ffc233" stroke-linecap="round" stroke-width="10"/>
-  <rect x="196" y="295" width="20" height="20" rx="4" fill="#35d6c1"/>
-  <rect x="247" y="295" width="20" height="20" rx="4" fill="#ffc233"/>
-  <rect x="298" y="295" width="20" height="20" rx="4" fill="#35d6c1"/>
+  <path d="M256 112 192 400h-62zm0 0 126 288h-62z" fill="#14213d"/>
+  <path d="m180 286 152 0 18.5 42h-189z" fill="#14213d"/>
+  <path d="M224 307h64" fill="none" stroke="#ffc233" stroke-linecap="round" stroke-width="6"/>
+  <circle cx="224" cy="307" r="7" fill="#35d6c1"/>
+  <circle cx="256" cy="307" r="7" fill="#35d6c1"/>
+  <circle cx="288" cy="307" r="7" fill="#35d6c1"/>
 </svg>

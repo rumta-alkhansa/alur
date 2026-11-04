@@ -79,6 +79,7 @@ details summary{cursor:pointer;font:800 18px "Baloo 2",system-ui,sans-serif}
 .rb i{position:absolute;right:-10px;top:-10px;font-style:normal;font-size:14px;line-height:20px;width:20px;height:20px;border-radius:50%;background:var(--pr);color:#fff;transition:transform .2s;text-align:center}
 .pg{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;align-items:center}
 .pc{min-width:56px;height:52px;border-radius:12px;border:2px solid var(--ln);background:var(--card);color:var(--tx);font:800 18px Nunito,system-ui,sans-serif;cursor:pointer;padding:0 12px}
+.pc:disabled{opacity:.45;cursor:not-allowed}
 .pc.sel{outline:4px solid var(--ac)}.pc.bad{border-color:var(--no);background:var(--nobg)}.pc.em{border-style:dashed;color:var(--mu);font-size:14px}
 .sl{display:grid;gap:8px;margin:8px 0;padding:0;list-style:none}
 .sl button{width:100%;text-align:left;min-height:52px;border-radius:12px;border:2px dashed var(--ln);background:var(--bg);color:var(--tx);font:700 17px Nunito,system-ui,sans-serif;padding:8px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
@@ -87,11 +88,48 @@ details summary{cursor:pointer;font:800 18px "Baloo 2",system-ui,sans-serif}
 .bk{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
 .bk button{border:2px solid var(--ln);background:var(--card);color:var(--tx);border-radius:12px;padding:10px 14px;font:700 17px Nunito,system-ui,sans-serif;cursor:pointer}
 .lb{font:800 15px "Baloo 2",system-ui,sans-serif;margin:10px 0 2px;color:var(--mu)}
-@media (min-width:900px){.gr td{width:84px;height:84px;font-size:38px}.pc{height:60px;font-size:22px}}
+@media (min-width:900px){.gr td{width:84px;height:84px;font-size:38px}.pc{height:60px;font-size:22px}.split-groups{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.brand .sub{color:#c9d6ee;font-weight:600;font-size:14px}
 .seg{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
 .map{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.split-groups{display:grid;gap:10px;margin:10px 0}
+.split-group{display:grid;gap:6px;border:2px solid var(--ln);border-radius:14px;padding:10px}
+.split-group h3{font:800 17px "Baloo 2",system-ui,sans-serif;margin:0}
+.split-slot{min-height:48px;text-align:left;border:2px dashed var(--ln);border-radius:10px;background:var(--bg);color:var(--tx);font:700 15px Nunito,system-ui,sans-serif;padding:8px 10px}
+.split-slot.ready{border-color:var(--pr);cursor:pointer}
+.split-slot b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--pr);color:#fff;margin-right:4px}
+.pattern-seq{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:32px;margin:12px 0}
+.pattern-seq span{display:grid;place-items:center;min-width:48px;height:52px;border:2px solid var(--ln);border-radius:12px;background:var(--card)}
+.pattern-seq span:last-child{border-style:dashed;color:var(--pr)}
+.rule-box{margin:14px 0;padding:14px;border:2px solid var(--ln);border-radius:16px;background:var(--bg)}
+.rule-box h3{margin:0 0 6px;font:800 19px "Baloo 2",system-ui,sans-serif}
+.rule-row{margin:10px 0}
+.rule-row>b{display:block;margin-bottom:4px}
+.rule-test{margin:0 4px 4px 0}
+.rule-result{display:inline-block;font-size:14px;font-weight:700;margin:4px 8px}
+.rule-result.ok{color:var(--ok)}.rule-result.no{color:var(--no)}
+.ab-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:10px 0}
+.ab-option{display:flex;align-items:center;gap:10px;min-height:54px;text-align:left;border:2px solid var(--ln);border-radius:12px;background:var(--card);color:var(--tx);padding:10px 12px;font:700 16px Nunito,system-ui,sans-serif;cursor:pointer}
+.ab-option.sel{border-color:var(--pr);background:var(--okbg)}
+.ab-option:focus-visible,.flow-slot:focus-visible{outline:3px solid var(--pr);outline-offset:2px}
+.ab-mark{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:8px;background:var(--bg);font-weight:800}
+.flowchart{display:grid;justify-items:center;gap:8px;margin:12px auto;padding:12px;border:2px solid var(--ln);border-radius:16px;background:var(--bg)}
+.flow-node,.flow-slot{max-width:100%;min-width:180px;padding:10px 14px;border:2px solid var(--pr);border-radius:14px;background:var(--card);color:var(--tx);text-align:center;font:800 16px/1.3 "Baloo 2",system-ui,sans-serif}
+.flow-slot{border-style:dashed;cursor:pointer}
+.flow-arrow{color:var(--pr);font-weight:800;font-size:20px;line-height:1}
+.flow-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;align-items:start}
+.flow-branches>div{display:grid;justify-items:center;gap:6px;min-width:0}
+.flow-branches .pg{justify-content:center}
+.ab-cases{display:grid;gap:8px;margin:8px 0}
+.ab-case{border:2px solid var(--ln);border-radius:12px;padding:10px;background:var(--card)}
+.ab-case>.pg{margin-bottom:0}
+.route-option{display:grid;gap:6px;flex:1 1 100%;text-align:left;border:2px solid var(--ln);border-radius:12px;background:var(--card);color:var(--tx);padding:8px 10px;font:700 15px Nunito,system-ui,sans-serif;cursor:pointer}
+.route-option.sel{border-color:var(--pr);outline:3px solid var(--pr)}
+.route-option:focus-visible{outline:3px solid var(--pr);outline-offset:2px}
+.route-option b{font:800 16px "Baloo 2",system-ui,sans-serif}
+.route-steps{display:flex;flex-wrap:wrap;gap:3px}
+.route-step{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--bg);border:1px solid var(--ln);font-weight:800}
 .lv{text-align:left;border:2px solid var(--ln);background:var(--card);color:var(--tx);border-radius:18px;padding:14px;cursor:pointer;font:700 16px/1.4 Nunito,system-ui,sans-serif}
 .lv:disabled{opacity:.5;cursor:not-allowed}.lv:focus-visible,.seg button:focus-visible{outline:3px solid var(--pr);outline-offset:2px}
 .lv h3{font:800 20px/1.2 "Baloo 2",system-ui,sans-serif;margin:4px 0}
@@ -99,6 +137,94 @@ details summary{cursor:pointer;font:800 18px "Baloo 2",system-ui,sans-serif}
 .lv .st{font-size:14px;color:var(--mu);font-weight:700}
 .dots i{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--ln);margin:6px 4px 0 0}.dots i.on{background:var(--ok)}
 select,input[type=text]{font:700 16px Nunito,system-ui,sans-serif;padding:10px 12px;border-radius:12px;border:2px solid var(--ln);background:var(--card);color:var(--tx);max-width:100%}
+.demo-details>summary{margin:-2px 0}
+.demo-details[open]>summary{margin-bottom:8px}
+.demo-details .mu{margin:0 0 8px}
+.demo-scene{border:2px solid var(--ln);border-radius:14px;background:var(--bg);padding:12px;margin:8px 0;overflow:hidden}
+.demo-scene b{font:800 15px "Baloo 2",system-ui,sans-serif}
+.demo-step,.demo-chip,.demo-test,.demo-group,.demo-case,.demo-detail,.demo-compact{border:2px solid var(--ln);border-radius:10px;background:var(--card);color:var(--tx);padding:8px 12px;font-weight:800;text-align:center}
+.demo-sequence{display:grid;justify-items:center;gap:6px}
+.demo-arrow{color:var(--pr);font-size:20px;line-height:1}
+.demo-debug{display:grid;gap:10px}
+.demo-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.demo-row>b{flex:1 0 100%;text-align:left}
+.demo-chip{font-size:14px}
+.demo-bug-chip{border-color:var(--no);background:var(--nobg)}
+.demo-test{color:var(--no);border-color:var(--no)}
+.demo-fix{border-top:2px dashed var(--ln);padding-top:10px}
+.demo-fix .demo-chip:nth-child(3){border-color:var(--ok);background:var(--okbg)}
+.demo-split{display:grid;gap:8px}
+.demo-group{display:grid;gap:4px;text-align:left}
+.demo-group span{font-size:14px;font-weight:700}
+.demo-loop{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px}
+.demo-repeat-step{border:2px solid var(--ln);border-radius:8px;background:var(--card);padding:6px 10px;font-weight:800}
+.demo-compact{border-color:var(--pr);color:var(--pr)}
+.demo-flow{display:grid;justify-items:center;gap:10px}
+.demo-condition{border:2px solid var(--pr);border-radius:12px;background:var(--card);padding:10px 14px;text-align:center;font-weight:800}
+.demo-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+.demo-case{display:grid;gap:6px;font-size:14px}
+.demo-yes{border-color:var(--ok)}
+.demo-no{border-color:var(--ac)}
+.demo-abstraction{display:grid;justify-items:center;gap:10px}
+.demo-details{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.demo-detail{font-size:14px}
+.demo-detail.keep{border-color:var(--ok)}
+.demo-detail.discard{border-color:var(--no);color:var(--mu)}
+.demo-filter{color:var(--pr)}
+.demo-selection{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:7px}
+.demo-selection span{border:2px solid var(--ok);border-radius:9px;background:var(--card);padding:6px 10px}
+.demo-selection b{color:var(--pr)}
+.demo-transcript{margin:0 0 8px;font-size:14px;color:var(--mu)}
+.demo-replay{min-height:44px}
+.demo-status{display:inline-block;margin-left:8px;color:var(--mu);font-size:14px}
+.demo-scene.is-playing .demo-step{animation:demo-highlight .9s ease both}
+.demo-sl.is-playing .demo-step:nth-of-type(1){animation-delay:.2s}
+.demo-sl.is-playing .demo-step:nth-of-type(2){animation-delay:1.2s}
+.demo-sl.is-playing .demo-step:nth-of-type(3){animation-delay:2.2s}
+.demo-pb.is-playing .demo-test{animation:demo-highlight .9s ease 1s both}
+.demo-pb.is-playing .demo-bug-chip{animation:demo-shake .7s ease 2s both}
+.demo-pb.is-playing .demo-fix{animation:demo-highlight 1s ease 3s both}
+.demo-pu.is-playing .demo-group:nth-child(1){animation-delay:.2s}
+.demo-pu.is-playing .demo-group:nth-child(2){animation-delay:1.2s}
+.demo-pu.is-playing .demo-repeat-step{animation:demo-highlight .8s ease 2.5s both}
+.demo-pu.is-playing .demo-repeat-step:nth-child(2){animation-delay:2.9s}
+.demo-pu.is-playing .demo-repeat-step:nth-child(3){animation-delay:3.3s}
+.demo-pu.is-playing .demo-repeat-step:nth-child(4){animation-delay:3.7s}
+.demo-pu.is-playing .demo-compact{animation:demo-highlight 1s ease 4.4s both}
+.demo-dt.is-playing .demo-condition{animation:demo-highlight .9s ease .2s both}
+.demo-dt.is-playing .demo-yes{animation:demo-highlight .9s ease 1.4s both}
+.demo-dt.is-playing .demo-no{animation:demo-highlight .9s ease 2.7s both}
+.demo-ab.is-playing .demo-detail.keep{animation:demo-highlight .9s ease .5s both}
+.demo-ab.is-playing .demo-detail.discard{animation:demo-fade 1.2s ease 1.8s both}
+.demo-ab.is-playing .demo-selection{animation:demo-highlight 1s ease 3.2s both}
+.demo-maker{display:grid;justify-items:center;gap:12px}
+.demo-mini-grid{display:grid;grid-template-columns:repeat(3,44px);gap:4px;padding:8px;border:2px solid var(--ln);border-radius:12px;background:var(--card)}
+.demo-mini-grid span{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--ln);border-radius:7px;background:var(--bg);font-weight:800}
+.demo-mini-grid span:nth-child(6){background:var(--tx);color:var(--card)}
+.demo-mini-grid span:nth-child(3){color:var(--ok)}
+.demo-mini-grid span:nth-child(10){color:var(--pr)}
+.demo-ra.is-playing .demo-mini-grid span:nth-child(6){animation:demo-highlight .8s ease .4s both}
+.demo-ra.is-playing .demo-mini-grid span:nth-child(10){animation:demo-highlight .8s ease 1.3s both}
+.demo-ra.is-playing .demo-mini-grid span:nth-child(3){animation:demo-highlight .8s ease 2.2s both}
+.demo-ra.is-playing .demo-filter{animation:demo-highlight .8s ease 3.1s both}
+.designer-grid{display:grid;grid-template-columns:repeat(5,minmax(42px,64px));justify-content:center;gap:5px;width:max-content;max-width:100%;margin:12px auto;padding:8px;border:2px solid var(--ln);border-radius:14px;background:var(--bg)}
+.designer-cell{display:grid;place-items:center;width:clamp(42px,12vw,64px);height:clamp(42px,12vw,64px);border:2px solid var(--ln);border-radius:10px;background:var(--card);color:var(--tx);font:800 12px Nunito,system-ui,sans-serif;cursor:pointer;touch-action:manipulation}
+.designer-cell:not(.fixed):hover{border-color:var(--pr)}
+.designer-cell:focus-visible{outline:3px solid var(--pr);outline-offset:1px}
+.designer-cell.blocked{background:#e5c79b;border-color:#a97932;color:#5d3b12;font-size:21px}
+.designer-cell.fixed{background:var(--okbg);border-color:var(--ok);color:var(--ok);cursor:default}
+.designer-cell.occupied{font-size:23px}
+.designer-robot{position:relative;display:grid;place-items:center}
+.designer-robot i{position:absolute;top:-5px;right:-7px;font:800 13px system-ui,sans-serif;color:var(--pr)}
+.designer-count{text-align:center;font-weight:800;color:var(--mu)}
+.challenge-map{border-collapse:separate;border-spacing:3px;margin:6px auto}
+.challenge-map td{width:26px;height:26px;border:1px solid var(--ln);border-radius:5px;text-align:center;background:var(--card);font-weight:800}
+.challenge-map tr:first-child td:last-child,.challenge-map tr:last-child td:first-child{color:var(--ok)}
+@keyframes demo-highlight{0%,100%{transform:scale(1);box-shadow:none}45%{transform:scale(1.05);box-shadow:0 0 0 4px var(--ac)}}
+@keyframes demo-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes demo-fade{0%,100%{opacity:1}70%{opacity:.25;text-decoration:line-through}}
+@media (prefers-reduced-motion:reduce){.demo-scene.is-playing *{animation:none!important}.demo-maker *{animation:none!important}}
+@media (min-width:900px){.demo-cases{max-width:620px}}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -113,7 +239,7 @@ select,input[type=text]{font:700 16px Nunito,system-ui,sans-serif;padding:10px 1
 <section id="play" hidden>
 <div class="tb" id="tb" aria-live="polite"></div>
 <details class="card" id="how"></details>
-<section class="card" id="cl"><h2 id="pt"></h2><p class="mu" id="ps"></p></section>
+<section class="card" id="cl"><h2 id="pt"></h2><p class="mu" id="ps"></p><div id="demo-card"></div></section>
 <section class="card" id="gd"><div id="bd"></div>
 <div class="bar">
 <button class="btn g" id="bc">Cek</button>
@@ -129,12 +255,15 @@ select,input[type=text]{font:700 16px Nunito,system-ui,sans-serif;padding:10px 1
 function tr(g,v){var R=g.map(function(x){return x.split("")});if(v==1)R=R.map(function(r){return r.slice().reverse()});if(v==2)R=R.slice().reverse().map(function(r){return r.slice().reverse()});return {g:R,d:v==2?2:0}}
 function at(g,c){for(var r=0;r<g.length;r++)for(var k=0;k<g[r].length;k++)if(g[r][k]==c)return [r,k]}
 function mv(g,p,ch){var r=p[0],c=p[1],d=p[2];if(ch=="L")return [r,c,(d+3)%4];if(ch=="R")return [r,c,(d+1)%4];var nr=r+DR[d][0],nc=c+DR[d][1];if(nr<0||nc<0||nr>=g.length||nc>=g[0].length||g[nr][nc]=="#")return null;return [nr,nc,d]}
+function expand(prog){var out=[];prog.forEach(function(a){if(typeof a=="string"){if(["F","L","R"].indexOf(a)<0)throw new Error("Perintah program tidak valid.");out.push(a);return}
+if(!a||["F","L","R"].indexOf(a.cmd)<0||typeof a.repeat!="number"||a.repeat%1||a.repeat<2||a.repeat>9)throw new Error("Blok ulangi tidak valid.");
+for(var i=0;i<a.repeat;i++)out.push(a.cmd)});return out}
 function sim(g,p,prog){var x=p;for(var i=0;i<prog.length;i++){x=mv(g,x,prog[i]);if(!x)return {ok:0,at:i}}var f=at(g,"F");return {ok:x[0]==f[0]&&x[1]==f[1]?1:0,at:prog.length}}
 function bfs(g,p){var f=at(g,"F"),q=[[p[0],p[1],p[2],0]],seen={};seen[p.join()]=1;while(q.length){var x=q.shift();if(x[0]==f[0]&&x[1]==f[1])return x[3];["F","L","R"].forEach(function(ch){var y=mv(g,x,ch);if(y&&!seen[y.join()]){seen[y.join()]=1;q.push([y[0],y[1],y[2],x[3]+1])}})}return -1}
 function gh(g,rb){var h='<div class="sc"><table class="gr">';g.forEach(function(row,r){h+='<tr>';row.forEach(function(ch,c){var x='',k='';if(ch=="#"){k="ob";x="📦"}else if(ch=="F"){k="fn";x="🏁"}else if(ch=="S")x="<small>START</small>";if(rb[0]==r&&rb[1]==c)x='<span class="rb">🤖<i style="transform:rotate('+(rb[2]*90)+'deg)">▲</i></span>';h+='<td class="'+k+'">'+x+'</td>'});h+='</tr>'});return h+'</table></div>'}
-function run(p,s,k){if(s.run)return;var g=p.t.g,i=0;s.rb=p.st.slice();s.run=1;s.bad=-1;rd();var tm=setInterval(function(){if(s.stop){clearInterval(tm);return}
-if(i>=s.prog.length){clearInterval(tm);s.run=0;var f=at(g,"F"),w=s.rb[0]==f[0]&&s.rb[1]==f[1];fin(k,w?"Robot sampai di FINIS. Kasus selesai!":"Robot berhenti sebelum FINIS. Periksa langkah terakhirnya.",w?"ok":"no",w);return}
-var y=mv(g,s.rb,s.prog[i]);if(!y){clearInterval(tm);s.run=0;s.bad=i;fin(k,"Robot menabrak atau keluar petak pada langkah "+(i+1)+". Itu tempat bug-nya!","no",0);return}s.rb=y;i++;rd()},500)}
+function run(p,s,k){if(s.run)return;var g=p.t.g,prog=expand(s.prog),i=0;s.rb=p.st.slice();s.run=1;s.bad=-1;rd();var tm=setInterval(function(){if(s.stop){clearInterval(tm);return}
+if(i>=prog.length){clearInterval(tm);s.run=0;var f=at(g,"F"),w=s.rb[0]==f[0]&&s.rb[1]==f[1];fin(k,w?"Robot sampai di FINIS. Kasus selesai!":"Robot berhenti sebelum FINIS. Periksa langkah terakhirnya.",w?"ok":"no",w);return}
+var y=mv(g,s.rb,prog[i]);if(!y){clearInterval(tm);s.run=0;s.bad=i;fin(k,"Robot menabrak atau keluar petak pada langkah "+(i+1)+". Itu tempat bug-nya!","no",0);return}s.rb=y;i++;rd()},500)}
 
 var SL=(function(){var MT=["Misi 1: Urutan Benda","Misi 2: Urutan Lebih Panjang","Misi 3: Robot di Lantai Berpetak","Misi 4: Kartu Paling Hemat"];
 var H=[["Mulai dari pertanyaan: apa yang harus ada lebih dulu sebelum robot bisa dipakai?","Cari langkah yang pasti pertama dan yang pasti terakhir, lalu isi bagian tengahnya.","Kalau satu langkah dipindah, apakah langkah sesudahnya masih bisa dikerjakan?"],
@@ -190,7 +319,69 @@ if(ed){s.ed++;s.sel=-1;s.rb=null;s.bad=-1;return 1}}
 function go(p,s,k){if(!s.prog.length){fin(k,"Programnya kosong. Tambahkan kartu dulu.","no",0);return}s.sel=-1;run(p,s,k)}
 function sum(p,s){return '<div>Salah satu program yang benar: '+p.ok.split("").map(function(c){return IC[c]}).join(" → ")+'</div><div>Jumlah perbaikan yang kamu buat: '+s.ed+'</div><div><b>Jurnal Bug</b> (tulis di buku): 1. Bug apa yang kamu temukan? 2. Apa penyebabnya? 3. Apa perbaikanmu?</div>'}
 
-return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})(),DT=(function(){var K=function(t,a,y,b,g,r,c){return {t:t,v:[a,y,b],f:[[g,r,c]]}};
+return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})();
+var PU=(function(DATA){var MT=["Misi 1: Pecah Tugas","Misi 2: Cari Pola","Misi 3: Blok Ulangi","Misi 4: Jalur Hemat"];
+var H=[
+["Tiap tugas kecil punya dua langkah. Tempatkan kartu pada tugas dan urutan yang cocok.","Mulai dari tugas pertama. Apa yang perlu disiapkan sebelum mulai merakit?","Periksa lagi urutan di dalam setiap tugas kecil."],
+["Perhatikan ubin dari kiri ke kanan. Bagian mana yang berulang?","Coba ucapkan pola yang kamu lihat dengan kata-kata.","Pilih ubin yang meneruskan pola, bukan yang hanya mirip."],
+["Satu blok dapat mengerjakan langkah yang sama berulang kali. Berapa maju yang diperlukan sebelum belok?","Bandingkan banyaknya langkah maju dengan banyaknya kartu program.","Jalankan programmu. Lihat posisi robot setelah setiap blok."],
+["Bandingkan jumlah kartu pada semua jalur.","Belokan juga memakai satu kartu. Hitung semua perintah.","Jalur mana yang sampai dengan kartu paling sedikit? Jelaskan alasanmu."]
+];
+function sw(x){return x.replace(/[LR]/g,function(c){return c=="L"?"R":"L"})}
+function P(m,v){
+if(m==0){var q=DATA.missions[v];return {kind:"split",s:q.story,groups:q.groups,items:q.order.map(function(i){return {text:q.steps[i],slot:i}})}}
+if(m==1){var p=DATA.patterns[v];return {kind:"pattern",s:p.story,seq:p.sequence,opts:p.options,answer:p.answer}}
+if(m==2){var t=tr(DATA.grid,v),a=at(t.g,"S");return {kind:"repeat",s:"Susun program dengan blok ulangi agar robot tiba di FINIS. Kartu program paling banyak 3.",t:t,st:[a[0],a[1],t.d],cap:3,solution:[{cmd:"F",repeat:4},v==1?"L":"R",{cmd:"F",repeat:4}]}}
+var board=tr(DATA.grid,v),start=at(board.g,"S"),routes=DATA.routes.map(function(r,i){var code=v==1?sw(r):r;return {id:i,name:"Jalur "+["Merah","Biru","Hijau"][i],code:code,cards:code.length}});
+routes=routes.slice(v).concat(routes.slice(0,v));
+return {kind:"route",s:"Tiga jalur menuju FINIS punya jumlah kartu berbeda. Pilih jalur paling hemat dan alasanmu.",t:board,st:[start[0],start[1],board.d],routes:routes,why:DATA.reasons,answer:0}
+}
+function init(p){if(p.kind=="split")return {slots:p.items.map(function(){return -1}),pick:-1};
+if(p.kind=="pattern")return {choice:-1};
+if(p.kind=="repeat")return {prog:[],repeatCount:0,rb:null,bad:-1,run:0};
+return {route:-1,why:-1}}
+function view(p,s){
+if(p.kind=="split"){var h='<p class="lb">Pilih kartu tugas, lalu pilih tempatnya.</p><div class="pg">'+p.items.map(function(x,i){var used=s.slots.indexOf(i)>-1;return '<button class="pc'+(s.pick==i?' sel':'')+(used?' em':'')+'" data-step="'+i+'">'+x.text+'</button>'}).join("")+'</div>';
+h+='<div class="split-groups">'+p.groups.map(function(g,gi){return '<section class="split-group"><h3>'+g+'</h3>'+[0,1].map(function(n){var slot=gi*2+n,idx=s.slots[slot];return '<button class="split-slot'+(s.pick>-1?' ready':'')+'" data-slot="'+slot+'"><b>'+(n+1)+'.</b> '+(idx<0?'Pilih langkah':p.items[idx].text)+'</button>'}).join("")+'</section>'}).join("")+'</div>';
+return h}
+if(p.kind=="pattern")return '<p class="lb">Ketuk ubin yang melanjutkan pola.</p><div class="pattern-seq">'+p.seq.map(function(x){return '<span>'+x+'</span>'}).join("")+'<span>?</span></div><div class="pg">'+p.opts.map(function(x,i){return '<button class="pc'+(s.choice==i?' sel':'')+'" data-opt="'+i+'">'+x+'</button>'}).join("")+'</div>';
+if(p.kind=="repeat"){var h=gh(p.t.g,s.rb||p.st)+'<p class="lb">Program ('+s.prog.length+' dari '+p.cap+' kartu). Ketuk kartu untuk menghapusnya.</p><div class="pg">'+(s.prog.length?s.prog.map(function(c,i){var label=typeof c=="string"?IC[c]:"Ulangi "+c.repeat+"× "+IC[c.cmd];return '<button class="pc" data-pi="'+i+'">'+(i+1)+'. '+label+'</button>'}).join(""):'<span class="mu">Belum ada kartu.</span>')+'</div><p class="lb">Tambah perintah biasa:</p><div class="pg">'+["F","L","R"].map(function(c){return '<button class="pc" data-add="'+c+'">'+IC[c]+'</button>'}).join("")+'</div><p class="lb">Blok ulangi: pilih jumlah, lalu gerakannya.</p><div class="pg">'+[2,3,4].map(function(n){return '<button class="pc'+(s.repeatCount==n?' sel':'')+'" data-count="'+n+'">'+n+' kali</button>'}).join("")+'</div><div class="pg">'+["F","L","R"].map(function(c){return '<button class="pc" data-loop="'+c+'"'+(s.repeatCount?'':' disabled')+'>Ulangi '+(s.repeatCount||"…")+'× '+IC[c]+'</button>'}).join("")+'</div>';return h}
+var rh=gh(p.t.g,p.st)+'<p class="lb">Bandingkan urutan perintah pada tiap jalur. Pilih satu.</p><div class="pg">'+p.routes.map(function(r,i){return '<button class="route-option'+(s.route==i?' sel':'')+'" data-route="'+i+'"><b>'+r.name+'</b><span class="route-steps">'+r.code.split("").map(function(c){var icon=c=="F"?"↑":c=="L"?"↰":"↱";return '<span class="route-step" aria-label="'+IC[c]+'">'+icon+'</span>'}).join("")+'</span></button>'}).join("")+'</div><p class="lb">Apa alasanmu?</p><div class="pg">'+p.why.map(function(x,i){return '<button class="pc'+(s.why==i?' sel':'')+'" data-why="'+i+'">'+x+'</button>'}).join("")+'</div>';return rh
+}
+function tap(e,p,s){var b=e.target.closest("button");if(!b)return;var d=b.dataset;
+if(p.kind=="split"){if(d.step!==undefined){var i=+d.step,old=s.slots.indexOf(i);if(old>-1){s.slots[old]=-1;s.pick=i}else s.pick=s.pick==i?-1:i;return 1}
+if(d.slot!==undefined){var k=+d.slot;if(s.pick>-1){s.slots[k]=s.pick;s.pick=-1}else if(s.slots[k]>-1){s.pick=s.slots[k];s.slots[k]=-1}return 1}return}
+if(p.kind=="pattern"&&d.opt!==undefined){s.choice=+d.opt;return 1}
+if(p.kind=="repeat"){if(d.count!==undefined){s.repeatCount=+d.count;return 1}
+if(d.loop&&s.repeatCount&&s.prog.length<p.cap){s.prog.push({cmd:d.loop,repeat:s.repeatCount});s.repeatCount=0;s.rb=null;return 1}
+if(d.add&&s.prog.length<p.cap){s.prog.push(d.add);s.rb=null;return 1}
+if(d.pi!==undefined){s.prog.splice(+d.pi,1);s.rb=null;return 1}return}
+if(d.route!==undefined){s.route=+d.route;return 1}if(d.why!==undefined){s.why=+d.why;return 1}
+}
+function go(p,s,k){
+if(p.kind=="split"){if(s.slots.indexOf(-1)>-1){fin(k,"Lengkapi semua tempat dulu. Mana tugas kecil yang belum selesai?","no",0);return}
+if(s.slots.some(function(item,slot){return p.items[item].slot!=slot})){fin(k,"Ada langkah yang belum pas. Cek urutan tugas kecil satu per satu.","no",0);return}
+fin(k,"","ok",1);return}
+if(p.kind=="pattern"){if(s.choice<0){fin(k,"Pilih satu ubin untuk melanjutkan pola.","no",0);return}
+if(s.choice!=p.answer){fin(k,"Belum cocok. Perhatikan susunan ubin dari awal.","no",0);return}
+fin(k,"","ok",1);return}
+if(p.kind=="repeat"){if(!s.prog.length){fin(k,"Tambahkan kartu program dulu.","no",0);return}
+if(!s.prog.some(function(c){return typeof c=="object"})){fin(k,"Coba gunakan satu blok ulangi untuk langkah yang berulang.","no",0);return}
+if(!sim(p.t.g,p.st,expand(s.prog)).ok){fin(k,"Robot belum tiba di FINIS. Periksa urutan blok dan arah belok.","no",0);return}
+run(p,s,k);return}
+if(s.route<0||s.why<0){fin(k,"Pilih satu jalur dan satu alasan.","no",0);return}
+if(p.routes[s.route].id!=p.answer||s.why!=0){fin(k,"Bandingkan lagi jumlah kartu. Belokan juga memakai satu kartu.","no",0);return}
+fin(k,"","ok",1)
+}
+function sum(p,s){
+if(p.kind=="split")return p.groups.map(function(g,i){return '<div><b>'+g+'</b>: '+[s.slots[i*2],s.slots[i*2+1]].map(function(n){return p.items[n].text}).join(" → ")+'</div>'}).join("");
+if(p.kind=="pattern")return '<div>Pola ubinmu lengkap. Apa yang berulang?</div>';
+if(p.kind=="repeat")return '<div>Program: '+s.prog.map(function(c){return typeof c=="string"?IC[c]:"Ulangi "+c.repeat+"× "+IC[c.cmd]}).join(" → ")+'</div><div>Blok program: '+s.prog.length+'. Langkah setelah dibuka: '+expand(s.prog).length+'. Apa yang diulang robot?</div>';
+var r=p.routes.filter(function(x){return x.id==p.answer})[0];return '<div>'+r.name+' memakai '+r.cards+' kartu, paling sedikit.</div><div>Belokan juga dihitung sebagai kartu. Apa yang kamu bandingkan?</div>'
+}
+
+return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})({"missions":[{"story":"Bantu menyiapkan robot ukur.","groups":["Siapkan alat","Rakit rangka","Uji robot"],"steps":["Baca petunjuk","Letakkan alat di meja","Sambungkan rangka","Pasang roda","Pasang baterai","Nyalakan robot"],"order":[4,0,3,1,5,2]},{"story":"Bantu merakit lampu meja.","groups":["Siapkan bahan","Rakit lampu","Uji lampu"],"steps":["Buka petunjuk","Susun bagian di meja","Sambungkan kabel","Pasang kaki lampu","Pasang bohlam","Nyalakan sakelar"],"order":[5,0,3,4,1,2]},{"story":"Bantu merakit kipas meja.","groups":["Siapkan bahan","Rakit kipas","Uji kipas"],"steps":["Baca petunjuk","Siapkan bagian kipas","Sambungkan kabel","Pasang baling-baling","Pasang baterai","Tekan tombol nyala"],"order":[4,2,0,3,5,1]}],"patterns":[{"story":"Ubin lantai punya pola bentuk.","sequence":["●","■","▲","●","■","▲","●"],"options":["■","▲","●"],"answer":0},{"story":"Simbol pada panel mengikuti pola.","sequence":["■","◆","●","■","◆","●","■"],"options":["◆","■","●"],"answer":0},{"story":"Papan hias memakai pola bentuk berulang.","sequence":["▲","●","■","▲","●","■","▲"],"options":["▲","●","■"],"answer":1}],"grid":["....F",".....",".....",".....","S...."],"routes":["FFFFRFFFF","RFFFFLFFFF","RFFFFLFFFLFFFFLFLFFFFLFF"],"reasons":["Jumlah kartu lebih sedikit","Nama jalurnya lebih pendek","Warnanya lebih terang"]});
+var DT=(function(){var K=function(t,a,y,b,g,r,c){return {t:t,v:[a,y,b],f:[[g,r,c]]}};
 var G=function(r,c,a,n){return {r:r,c:c,a:a,n:n}};
 var V=["A","B","C"],MT=["Misi 1: Tiga Pilihan","Misi 2: Tiga Tugas","Misi 3: Empat Pilihan","Misi 4: Warna dan Tugas"];
 var H=[
@@ -198,6 +389,29 @@ var H=[
 ["Mulai dari petunjuk berlambang ✓ hijau. Itu yang paling pasti.","Sesudah satu ✓ terpasang, lihat baris robot lain. Kotak mana yang masih mungkin?","Robot terakhir mendapat sisa tugas. Cocokkan dengan petunjuk ✗."],
 ["Mulai dari petunjuk berlambang ✓ hijau, lalu lanjut ke petunjuk yang menyebut robot yang sama dua kali.","Kalau satu robot sudah ✗ di dua kotak, pilihannya tinggal sedikit. Cek kolom yang sudah terpakai.","Kerjakan baris yang pilihannya paling sedikit lebih dulu."],
 ["Kerjakan Tabel B dulu dari dua petunjuk berlambang ✓ hijau. Sisanya terisi karena tinggal satu pilihan.","Tabel A: robot yang punya dua ✗ pasti memakai warna ketiga.","Robot yang ✗ pada satu tugas pasti bukan warna pemilik tugas itu. Cari warnanya.","Setelah Tabel A dan B terisi, salin hasilnya ke Tabel C."]];
+var RULES=[
+[
+{goal:"Jaga robot agar tidak menabrak.",condition:"sensor depan mendeteksi kardus",yes:"Berhenti",no:"Maju",other:"Belok kanan",yesCase:"kardus terdeteksi",noCase:"jalur kosong"},
+{goal:"Jaga robot agar aman di jalur.",condition:"sensor depan mendeteksi penghalang",yes:"Berhenti",no:"Maju",other:"Belok kiri",yesCase:"penghalang terdeteksi",noCase:"jalur kosong"},
+{goal:"Arahkan robot di lorong.",condition:"sensor jarak membaca benda dekat",yes:"Berhenti",no:"Maju",other:"Putar balik",yesCase:"benda terdeteksi",noCase:"lorong kosong"}
+],
+[
+{goal:"Atur lampu ruang kerja.",condition:"sensor membaca ruangan gelap",yes:"Nyalakan lampu",no:"Matikan lampu",other:"Bunyikan bel",yesCase:"ruangan gelap",noCase:"ruangan terang"},
+{goal:"Atur lampu meja.",condition:"sensor membaca cahaya redup",yes:"Nyalakan lampu",no:"Matikan lampu",other:"Tutup lampu",yesCase:"cahaya redup",noCase:"cahaya cukup"},
+{goal:"Atur lampu panel.",condition:"sensor mendeteksi keadaan gelap",yes:"Nyalakan lampu",no:"Matikan lampu",other:"Kirim tanda",yesCase:"panel gelap",noCase:"panel terang"}
+],
+[
+{goal:"Atur robot saat dayanya sedikit.",condition:"baterai robot lemah",yes:"Isi daya",no:"Lanjut tugas",other:"Matikan layar",yesCase:"baterai lemah",noCase:"baterai cukup"},
+{goal:"Atur gerobak robot saat dayanya sedikit.",condition:"daya hampir habis",yes:"Isi daya",no:"Lanjut tugas",other:"Bunyikan bel",yesCase:"daya hampir habis",noCase:"daya masih cukup"},
+{goal:"Atur alat ukur saat dayanya sedikit.",condition:"lampu baterai menyala merah",yes:"Isi daya",no:"Lanjut tugas",other:"Matikan alat",yesCase:"lampu baterai merah",noCase:"lampu baterai hijau"}
+],
+[
+{goal:"Jaga robot saat sensor lantai aktif.",condition:"sensor mendeteksi lantai basah",yes:"Berhenti",no:"Maju",other:"Belok kanan",yesCase:"lantai basah",noCase:"lantai kering"},
+{goal:"Jaga robot di jalur yang aman.",condition:"sensor membaca air di depan",yes:"Berhenti",no:"Maju",other:"Belok kiri",yesCase:"ada air",noCase:"tidak ada air"},
+{goal:"Atur robot saat alarm jalur berbunyi.",condition:"alarm bahaya aktif",yes:"Berhenti",no:"Maju",other:"Putar balik",yesCase:"alarm aktif",noCase:"alarm mati"}
+]
+];
+function ruleFor(m,v){var r=RULES[m][v],choices=[r.yes,r.no,r.other],shift=(m+v)%3;return {goal:r.goal,condition:r.condition,yesAction:r.yes,noAction:r.no,yesCase:r.yesCase,noCase:r.noCase,choices:choices.slice(shift).concat(choices.slice(0,shift)),tests:[{condition:1,label:r.yesCase},{condition:0,label:r.noCase},{condition:1,label:r.yesCase}]}}
 var D=[
 [{s:"Tiga komponen robot disimpan di tiga kotak. Satu komponen, satu kotak.",g:[G(["🔋 Baterai","⚙️ Motor","📡 Sensor"],["Kotak 1","Kotak 2","Kotak 3"],[1,2,0])],k:[K("Baterai ada di Kotak 2.","🔋 Baterai","✓","Kotak 2",0,0,1),K("Motor tidak ada di Kotak 1.","⚙️ Motor","✗","Kotak 1",0,1,0)]},
 {s:"Tiga komponen robot disimpan di tiga rak. Satu komponen, satu rak.",g:[G(["💡 Lampu","🛞 Roda","🔌 Kabel"],["Rak 1","Rak 2","Rak 3"],[2,0,1])],k:[K("Lampu ada di Rak 3.","💡 Lampu","✓","Rak 3",0,0,2),K("Roda tidak ada di Rak 2.","🛞 Roda","✗","Rak 2",0,1,1)]},
@@ -211,16 +425,21 @@ var D=[
 [{s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-X","🤖 Robo-Y","🤖 Robo-Z"],["🔴 Merah","🔵 Biru","🟡 Kuning"],[2,0,1],"Tabel A: Robot dan Warna"),G(["🔴 Merah","🔵 Biru","🟡 Kuning"],["🏗️ Mengangkat","✏️ Menggambar","🧹 Menyapu"],[1,0,2],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-X","🤖 Robo-Y","🤖 Robo-Z"],["🏗️ Mengangkat","✏️ Menggambar","🧹 Menyapu"],[2,1,0],"Tabel C: Robot dan Tugas")],k:[K("Robot merah bertugas menggambar.","🔴 Merah","✓","✏️ Menggambar",1,0,1),K("Robo-X bukan robot biru.","Robo-X","✗","🔵 Biru",0,0,1),K("Robo-X juga bukan robot merah.","Robo-X","✗","🔴 Merah",0,0,0),K("Robot kuning bertugas menyapu.","🟡 Kuning","✓","🧹 Menyapu",1,2,2),K("Robo-Y tidak bertugas mengangkat.","Robo-Y","✗","🏗️ Mengangkat",2,1,0)]},
 {s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-P","🤖 Robo-Q","🤖 Robo-R"],["🟢 Hijau","🟠 Oranye","🟣 Ungu"],[2,1,0],"Tabel A: Robot dan Warna"),G(["🟢 Hijau","🟠 Oranye","🟣 Ungu"],["🔍 Mengukur","📦 Memindah","🔔 Memberi tanda"],[2,1,0],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-P","🤖 Robo-Q","🤖 Robo-R"],["🔍 Mengukur","📦 Memindah","🔔 Memberi tanda"],[0,1,2],"Tabel C: Robot dan Tugas")],k:[K("Robot oranye bertugas memindah.","🟠 Oranye","✓","📦 Memindah",1,1,1),K("Robo-P bukan robot hijau.","Robo-P","✗","🟢 Hijau",0,0,0),K("Robo-P juga bukan robot oranye.","Robo-P","✗","🟠 Oranye",0,0,1),K("Robot ungu bertugas mengukur.","🟣 Ungu","✓","🔍 Mengukur",1,2,0),K("Robo-Q tidak memberi tanda.","Robo-Q","✗","🔔 Memberi tanda",2,1,2)]},
 {s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-S","🤖 Robo-T","🤖 Robo-U"],["⚪ Putih","⚫ Hitam","🟤 Cokelat"],[1,0,2],"Tabel A: Robot dan Warna"),G(["⚪ Putih","⚫ Hitam","🟤 Cokelat"],["🔧 Merakit","🚚 Mengantar","🧽 Membersihkan"],[1,2,0],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-S","🤖 Robo-T","🤖 Robo-U"],["🔧 Merakit","🚚 Mengantar","🧽 Membersihkan"],[2,1,0],"Tabel C: Robot dan Tugas")],k:[K("Robot putih bertugas mengantar.","⚪ Putih","✓","🚚 Mengantar",1,0,1),K("Robo-S bukan robot putih.","Robo-S","✗","⚪ Putih",0,0,0),K("Robo-S juga bukan robot cokelat.","Robo-S","✗","🟤 Cokelat",0,0,2),K("Robot hitam bertugas membersihkan.","⚫ Hitam","✓","🧽 Membersihkan",1,1,2),K("Robo-T tidak bertugas merakit.","Robo-T","✗","🔧 Merakit",2,1,0)]}]];
-function P(m,v){return D[m][v]}
-function init(p){return {sg:p.g.map(function(g){return g.r.map(function(){return g.c.map(function(){return 0})})}),kd:{},hk:-1,auto:true,bad:[]}}
+function P(m,v){var p=D[m][v];return {s:p.s,g:p.g,k:p.k,rule:ruleFor(m,v)}}
+function init(p){return {sg:p.g.map(function(g){return g.r.map(function(){return g.c.map(function(){return 0})})}),kd:{},hk:-1,auto:true,bad:[],ruleYes:-1,ruleNo:-1,ruleResults:[]}}
 function okg(p,s,gi){var g=p.g[gi],x=s.sg[gi];return g.a.every(function(c,r){return x[r][c]==1})&&x.every(function(row,r){return row.every(function(y,c){return y!=1||g.a[r]==c})})}
 function hlc(p,s,g,r,c){var k=p.k[s.hk];if(!k)return "";var o="";k.f.forEach(function(f){if(f[0]==g){if(f[1]==r||f[2]==c)o=" hl";if(f[1]==r&&f[2]==c)o=" hl hl2"}});return o}
 function view(p,s){
 var h='<ol class="k">'+p.k.map(function(c,i){var d=s.kd[i];return '<li tabindex="0" class="'+(d?'dn ':'')+(i==s.hk?'sel':'')+'" data-k="'+i+'"><b>'+(i+1)+'</b><div class="kt"><span>'+c.t+'</span><span class="vz"><i>'+c.v[0]+'</i><u class="'+(c.v[1]=="✓"?'y':'n')+'">'+c.v[1]+'</u><i>'+c.v[2]+'</i></span></div><button class="ck" data-ck="'+i+'">'+(d?'Pakai lagi':'Sudah dipakai')+'</button></li>'}).join("")+'</ol>';
 h+=p.g.map(function(g,gi){var t=(g.n?'<div class="gt">'+g.n+'</div>':'')+'<div class="sc"><table><tr><th></th>'+g.c.map(function(c){var m=c.split(" ");return '<th><span class="e">'+m[0]+'</span>'+m.slice(1).join(" ")+'</th>'}).join("")+'</tr>';
 g.r.forEach(function(r,ri){var m=r.split(" ");t+='<tr><th class="r">'+m[0]+" "+m.slice(1).join(" ")+'</th>';g.c.forEach(function(c,ci){var x=s.sg[gi][ri][ci],b=s.bad.indexOf(gi+"-"+ri+"-"+ci)>-1;t+='<td><button class="cell c'+x+hlc(p,s,gi,ri,ci)+(b?' bad':'')+'" data-g="'+gi+'" data-r="'+ri+'" data-c="'+ci+'" aria-label="'+r+' dan '+c+'">'+["","✓","✗"][x]+'</button></td>'});t+='</tr>'});return t+'</table></div>'}).join("");
-return h+'<div class="bar"><button class="btn s" data-auto="1">Coret otomatis: '+(s.auto?'nyala':'mati')+'</button></div>'}
+ h+='<div class="bar"><button class="btn s" data-auto="1">Coret otomatis: '+(s.auto?'nyala':'mati')+'</button></div>';
+ if(isDone(key())){var r=p.rule;h+='<section class="rule-box"><h3>Latihan singkat: Jika… Maka…</h3><p>'+r.goal+'</p><p>Pilih aturan untuk mesin ini.</p><div class="rule-row"><b>Jika '+r.condition+', maka…</b><div class="pg">'+r.choices.map(function(a,i){return '<button class="pc'+(s.ruleYes==i?' sel':'')+'" data-rule-yes="'+i+'">'+a+'</button>'}).join("")+'</div></div><div class="rule-row"><b>Jika kondisi tidak terpenuhi, maka…</b><div class="pg">'+r.choices.map(function(a,i){return '<button class="pc'+(s.ruleNo==i?' sel':'')+'" data-rule-no="'+i+'">'+a+'</button>'}).join("")+'</div></div><p class="lb">Uji aturan:</p><div class="pg">'+r.tests.map(function(t,i){var result=s.ruleResults[i];return '<button class="btn s rule-test" data-rule-test="'+i+'"'+(s.ruleYes<0||s.ruleNo<0?' disabled':'')+'>Uji '+(i+1)+': '+t.label+'</button>'+(result?'<span class="rule-result '+(result.ok?'ok':'no')+'">'+result.text+'</span>':'')}).join("")+'</div><p class="mu">Latihan ini opsional. Hasilnya tidak mengubah progres misi.</p></section>'}
+ return h}
 function tap(e,p,s){var t=e.target,c;
+if(c=t.closest("[data-rule-yes]")){s.ruleYes=+c.dataset.ruleYes;s.ruleResults=[];return 1}
+if(c=t.closest("[data-rule-no]")){s.ruleNo=+c.dataset.ruleNo;s.ruleResults=[];return 1}
+if(c=t.closest("[data-rule-test]")){var ri=+c.dataset.ruleTest,test=p.rule.tests[ri],actionIndex=test.condition?s.ruleYes:s.ruleNo,action=p.rule.choices[actionIndex],right=test.condition?p.rule.yesAction:p.rule.noAction,ok=action==right;s.ruleResults[ri]={ok:ok,text:(test.condition?"Kondisi terpenuhi. ":"Kondisi tidak terpenuhi. ")+"Mesin memilih “"+action+"”. "+(ok?"Aturan cocok untuk uji ini.":"Coba pikirkan lagi aturanmu.")};return 1}
 if(c=t.closest(".ck")){var i=+c.dataset.ck;s.kd[i]=!s.kd[i];return 1}
 if(c=t.closest(".cell")){var g=+c.dataset.g,r=+c.dataset.r,k=+c.dataset.c,x=s.sg[g],n=(x[r][k]+1)%3;x[r][k]=n;s.bad=[];
 if(n==1&&s.auto){x[r].forEach(function(y,i){if(i!=k&&!y)x[r][i]=2});x.forEach(function(row,i){if(i!=r&&!row[k])row[k]=2})}
@@ -231,12 +450,101 @@ function go(p,s,k){var w=[];p.g.forEach(function(g,gi){s.sg[gi].forEach(function
 function sum(p,s){return p.g.map(function(g){return g.a.map(function(c,r){return '<div>'+g.r[r]+' ➜ '+g.c[c]+'</div>'}).join("")}).join("")}
 
 return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})();
+var AB=(function(DATA){var MT=["Misi 1: Pilih Informasi","Misi 2: Sederhanakan Peta","Misi 3: Susun Diagram","Misi 4: Ikuti Diagram"];
+var H=[
+["Mulai dari tujuan robot. Informasi mana yang membantu menuju tujuan?","Apakah warna dinding mengubah arah atau tujuan robot?","Pilih informasi yang membantu robot bergerak dengan aman."],
+["Peta perlu menunjukkan awal dan tujuan. Apa lagi yang dapat menghalangi jalan?","Bayangkan robot melihat peta ini. Detail mana yang tidak membantu perjalanan?","Periksa kembali: apakah peta tetap berguna setelah detail itu dihapus?"],
+["Diagram punya awal, langkah, dan pemeriksaan. Mana yang harus dimulai lebih dulu?","Pemeriksaan memberi dua cabang. Pasangkan tujuan dengan cabang yang sesuai.","Telusuri urutan dari Mulai sampai keputusan."],
+["Baca kondisi pada diagram sebelum memilih hasil.","Apakah contoh ini memenuhi kondisi?","Ikuti cabang Ya atau Tidak sampai ke tujuan." ]
+];
+function P(m,v){var d;if(m==0){d=DATA.missions[v];return {kind:"info",s:d.story,options:d.options,answer:d.answer}}
+if(m==1){d=DATA.maps[v];return {kind:"map",s:d.story,options:d.options,answer:d.answer}}
+if(m==2){d=DATA.flows[v];return {kind:"build",s:d.story,blocks:d.blocks,order:d.order,yes:d.yes,no:d.no,actions:d.actions}}
+d=DATA.tests[v];return {kind:"trace",s:d.story,condition:d.condition,yes:d.yes,no:d.no,cases:d.cases,options:d.options}
+}
+function init(p){return {chosen:[],slots:p.blocks?[-1,-1,-1]:[],pick:-1,yes:-1,no:-1,trace:p.cases?p.cases.map(function(){return -1}):[]}}
+function selected(list,n){return list.indexOf(n)>-1}
+function view(p,s){
+if(p.kind=="info"||p.kind=="map")return '<p class="lb">'+(p.kind=="info"?"Pilih informasi yang penting.":"Pilih benda yang perlu ada pada peta.")+'</p><div class="ab-options">'+p.options.map(function(x,i){return '<button class="ab-option'+(selected(s.chosen,i)?' sel':'')+'" data-choice="'+i+'"><span class="ab-mark">'+(selected(s.chosen,i)?"✓":"+")+'</span>'+x+'</button>'}).join("")+'</div>';
+if(p.kind=="build"){var h='<p class="lb">Pilih blok, lalu tempatkan pada diagram. Isi juga cabang Ya dan Tidak.</p><div class="pg">'+p.blocks.map(function(x,i){var used=s.slots.indexOf(i)>-1;return '<button class="pc'+(s.pick==i?' sel':'')+(used?' em':'')+'" data-block="'+i+'">'+x+'</button>'}).join("")+'</div><div class="flowchart">'+s.slots.map(function(x,i){return '<button class="flow-slot" data-flow-slot="'+i+'">'+(x<0?"Tempat blok "+(i+1):p.blocks[x])+'</button><span class="flow-arrow">↓</span>'}).join("")+'<div class="flow-branches"><div><b>Ya</b><div class="pg">'+p.actions.map(function(x,i){return '<button class="pc'+(s.yes==i?' sel':'')+'" data-branch="yes" data-action="'+i+'">'+x+'</button>'}).join("")+'</div></div><div><b>Tidak</b><div class="pg">'+p.actions.map(function(x,i){return '<button class="pc'+(s.no==i?' sel':'')+'" data-branch="no" data-action="'+i+'">'+x+'</button>'}).join("")+'</div></div></div><div class="flow-node">Selesai</div></div>';return h}
+var h='<p class="lb">Diagram: Jika '+p.condition+' maka '+p.yes+'; jika tidak, '+p.no+'.</p><div class="flowchart"><div class="flow-node">Mulai</div><span class="flow-arrow">↓</span><div class="flow-node">Periksa: '+p.condition+'</div><div class="flow-branches"><div><b>Ya</b><span class="flow-arrow">↓</span><div class="flow-node">'+p.yes+'</div></div><div><b>Tidak</b><span class="flow-arrow">↓</span><div class="flow-node">'+p.no+'</div></div></div><div class="flow-node">Selesai</div></div><p class="lb">Ikuti diagram untuk tiap contoh.</p>';
+h+='<div class="ab-cases">'+p.cases.map(function(c,ci){return '<section class="ab-case"><b>'+c.label+'</b><div class="pg">'+p.options.map(function(x,i){return '<button class="pc'+(s.trace[ci]==i?' sel':'')+'" data-case="'+ci+'" data-output="'+i+'">'+x+'</button>'}).join("")+'</div></section>'}).join("")+'</div>';return h
+}
+function tap(e,p,s){var b=e.target.closest("button");if(!b)return;var d=b.dataset;
+if(d.choice!==undefined){var c=+d.choice,i=s.chosen.indexOf(c);if(i>-1)s.chosen.splice(i,1);else s.chosen.push(c);return 1}
+if(d.block!==undefined){var n=+d.block,old=s.slots.indexOf(n);if(old>-1){s.slots[old]=-1;s.pick=n}else s.pick=s.pick==n?-1:n;return 1}
+if(d.flowSlot!==undefined){var slot=+d.flowSlot;if(s.pick>-1){var prev=s.slots.indexOf(s.pick);if(prev>-1)s.slots[prev]=-1;s.slots[slot]=s.pick;s.pick=-1}else if(s.slots[slot]>-1){s.pick=s.slots[slot];s.slots[slot]=-1}return 1}
+if(d.action!==undefined){if(d.branch=="yes")s.yes=+d.action;else s.no=+d.action;return 1}
+if(d.case!==undefined){s.trace[+d.case]=+d.output;return 1}
+}
+function sameSet(a,b){return a.length==b.length&&a.every(function(x){return b.indexOf(x)>-1})}
+function go(p,s,k){
+if(p.kind=="info"||p.kind=="map"){if(!s.chosen.length){fin(k,"Pilih dulu informasi yang menurutmu berguna.","no",0);return}
+if(!sameSet(s.chosen,p.answer)){fin(k,"Belum pas. Pikirkan lagi tujuan dan detail yang benar-benar membantu.","no",0);return}
+fin(k,"","ok",1);return}
+if(p.kind=="build"){if(s.slots.indexOf(-1)>-1||s.yes<0||s.no<0){fin(k,"Lengkapi semua blok dan cabang diagram dulu.","no",0);return}
+if(s.slots.some(function(x,i){return x!=p.order[i]})||p.actions[s.yes]!=p.yes||p.actions[s.no]!=p.no){fin(k,"Ada bagian yang belum cocok. Telusuri diagram dari Mulai ke tiap cabang.","no",0);return}
+fin(k,"","ok",1);return}
+if(s.trace.indexOf(-1)>-1){fin(k,"Pilih hasil untuk setiap contoh dulu.","no",0);return}
+if(s.trace.some(function(x,i){return p.options[x]!=(p.cases[i].condition?p.yes:p.no)})){fin(k,"Ada contoh yang mengikuti cabang berbeda. Periksa kondisi pada diagram.","no",0);return}
+fin(k,"","ok",1)
+}
+function sum(p,s){
+if(p.kind=="info"||p.kind=="map")return '<div>Informasi yang kamu pilih:</div><div>'+s.chosen.map(function(i){return p.options[i]}).join(" · ")+'</div><div>Detail penting membantu menyelesaikan tujuan. Detail lain bisa diabaikan.</div>';
+if(p.kind=="build")return '<div>Diagrammu mulai, memeriksa kondisi, lalu memilih cabang Ya atau Tidak.</div><div>Apa yang berubah jika kondisinya berbeda?</div>';
+return '<div>Kamu mengikuti diagram pada '+s.trace.length+' contoh.</div><div>Ketika kondisi berubah, hasilnya mengikuti cabang yang berbeda.</div>'
+}
+
+return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})({"missions":[{"story":"Robot harus mencari paket baterai. Informasi mana yang dibutuhkan?","options":["Letak robot sekarang","Letak rak baterai","Petak yang terhalang kardus","Warna dinding","Jumlah lampu","Nama pembuat robot"],"answer":[0,1,2]},{"story":"Robot harus mencari kotak lampu. Informasi mana yang dibutuhkan?","options":["Jumlah jendela","Letak robot sekarang","Bentuk gagang pintu","Letak lemari lampu","Warna lantai","Petak yang terhalang kardus"],"answer":[1,3,5]},{"story":"Robot harus mencari kunci di bengkel. Informasi mana yang dibutuhkan?","options":["Warna atap","Petak yang tertutup rak","Nama perancang bengkel","Jumlah kursi","Letak kotak perkakas","Letak robot sekarang"],"answer":[1,4,5]}],"maps":[{"story":"Sederhanakan peta agar robot dapat mengantar paket dari pintu ke rak.","options":["Pintu masuk","Rak tujuan","Kardus penghalang","Jam dinding","Poster","Warna lantai"],"answer":[0,1,2]},{"story":"Sederhanakan peta agar robot dapat membawa alat dari meja ke lemari.","options":["Jendela","Meja awal","Lemari tujuan","Lampu atap","Pola ubin","Kotak penghalang"],"answer":[1,2,5]},{"story":"Sederhanakan peta agar robot dapat bergerak dari gerbang ke bengkel.","options":["Warna dinding","Rak penghalang","Papan jam","Bengkel tujuan","Pot tanaman","Gerbang awal"],"answer":[1,3,5]}],"flows":[{"story":"Susun diagram untuk memilah paket berdasarkan nomor.","blocks":["Mulai","Baca nomor paket","Cek: nomor genap?"],"order":[0,1,2],"yes":"Rak biru","no":"Rak kuning","actions":["Rak biru","Rak kuning","Meja periksa"]},{"story":"Susun diagram untuk memilih jalur berdasarkan roda robot.","blocks":["Hitung roda robot","Mulai","Cek: jumlah roda genap?"],"order":[1,0,2],"yes":"Jalur cepat","no":"Jalur aman","actions":["Tempat servis","Jalur aman","Jalur cepat"]},{"story":"Susun diagram untuk memilih kotak berdasarkan kode.","blocks":["Cek: kode dua digit?","Baca kode barang","Mulai"],"order":[2,1,0],"yes":"Kotak lebar","no":"Kotak kecil","actions":["Kotak kecil","Meja ukur","Kotak lebar"]}],"tests":[{"story":"Ikuti diagram. Jalur mana yang dipilih mesin?","condition":"nomor paket genap?","yes":"Rak biru","no":"Rak kuning","cases":[{"label":"Paket nomor 24","condition":true},{"label":"Paket nomor 15","condition":false},{"label":"Paket nomor 8","condition":true}],"options":["Rak biru","Rak kuning","Meja periksa"]},{"story":"Ikuti diagram. Jalur mana yang dipilih mesin?","condition":"jumlah roda genap?","yes":"Jalur cepat","no":"Jalur aman","cases":[{"label":"Robot dengan 4 roda","condition":true},{"label":"Robot dengan 3 roda","condition":false},{"label":"Robot dengan 6 roda","condition":true}],"options":["Tempat servis","Jalur aman","Jalur cepat"]},{"story":"Ikuti diagram. Jalur mana yang dipilih mesin?","condition":"kode dua digit?","yes":"Kotak lebar","no":"Kotak kecil","cases":[{"label":"Kode 42","condition":true},{"label":"Kode 7","condition":false},{"label":"Kode 18","condition":true}],"options":["Kotak kecil","Meja ukur","Kotak lebar"]}]});
+var RA=(function(){var MT=["Misi 1: Buat Peta","Misi 2: Tambah Penghalang","Misi 3: Uji Jalur","Misi 4: Tantangan Siap"];
+var H=[
+["Ketuk petak kosong untuk menaruh penghalang. Petak mana yang aman untuk dihalangi?","Peta harus tetap punya jalan dari START ke FINIS.","Coba petak yang berbeda jika robot tidak punya jalan."],
+["Penghalang membuat jalur perlu direncanakan. Di mana kamu akan menaruhnya?","Hitung jumlah penghalang, lalu periksa jalur robot.","Apakah semua penghalang berada di petak kosong?"],
+["Susun program sedikit demi sedikit. Menghadap ke arah mana robot mulai?","Uji program dan perhatikan perubahan arah robot.","Jika robot berhenti, bagian mana yang perlu diperbaiki?"],
+["Peta perlu memenuhi jumlah penghalang dan punya jalan yang bisa dilalui.","Uji program dari START sampai FINIS.","Bisakah kamu menjelaskan cara menguji tantangan ini?"]
+];
+var BASE=["....F",".....",".....",".....","S...."];
+function P(m,v){var t=tr(BASE,v),a=at(t.g,"S");return {s:["Rancang peta dengan tepat 1 penghalang.","Rancang peta dengan tepat 2 penghalang.","Rancang peta dengan tepat 3 penghalang.","Rancang peta dengan tepat 4 penghalang."][m],t:t,st:[a[0],a[1],t.d],walls:m+1,cap:20}}
+function init(p){return {g:p.t.g.map(function(r){return r.slice()}),prog:[],rb:null,bad:-1,run:0}}
+function view(p,s){
+var h='<p class="lb">Ketuk petak kosong untuk menambah atau menghapus penghalang. START dan FINIS tidak dapat diubah.</p><div class="designer-grid" role="group" aria-label="Peta rancangan">';
+s.g.forEach(function(row,r){row.forEach(function(ch,c){var fixed=ch=="S"||ch=="F",robot=s.rb&&s.rb[0]==r&&s.rb[1]==c,face=robot?'<span class="designer-robot">🤖<i style="transform:rotate('+(s.rb[2]*90)+'deg)">▲</i></span>':ch=="S"?"START":ch=="F"?"FINIS":ch=="#"?"■":"·";
+var label=robot?"Robot, "+(ch=="F"?"FINIS":"petak kosong"):ch=="S"?"START":ch=="F"?"FINIS":ch=="#"?"Penghalang":"Petak kosong";
+h+='<button type="button" class="designer-cell'+(ch=="#"?' blocked':'')+(fixed?' fixed':'')+(robot?' occupied':'')+'" data-cell="'+r+'-'+c+'" aria-label="'+label+'"'+(fixed||s.run?' disabled':'')+'>'+face+'</button>'})});
+h+='</div><div class="designer-count">Penghalang: '+s.g.map(function(r){return r.filter(function(c){return c=="#"}).length}).reduce(function(a,b){return a+b},0)+' dari '+p.walls+'</div><p class="lb">Program ('+s.prog.length+' dari '+p.cap+' kartu):</p><div class="pg">'+(s.prog.length?s.prog.map(function(c,i){return '<button type="button" class="pc" data-program="'+i+'">'+(i+1)+'. '+IC[c]+' · hapus</button>'}).join(""):'<span class="mu">Belum ada kartu.</span>')+'</div><div class="pg">'+["F","L","R"].map(function(c){return '<button type="button" class="pc" data-command="'+c+'"'+(s.prog.length>=p.cap||s.run?' disabled':'')+'>'+IC[c]+'</button>'}).join("")+'</div>';
+return h
+}
+function tap(e,p,s){var b=e.target.closest("button");if(!b)return;var d=b.dataset;
+if(d.cell!==undefined){var a=d.cell.split("-"),r=+a[0],c=+a[1];if(s.g[r][c]=="S"||s.g[r][c]=="F")return;s.g[r][c]=s.g[r][c]=="#" ? "." : "#";s.rb=null;s.bad=-1;return 1}
+if(d.command){if(s.prog.length<p.cap){s.prog.push(d.command);s.rb=null;s.bad=-1}return 1}
+if(d.program!==undefined){s.prog.splice(+d.program,1);s.rb=null;s.bad=-1;return 1}
+}
+function wallCount(g){return g.reduce(function(n,r){return n+r.filter(function(c){return c=="#"}).length},0)}
+function go(p,s,k){
+var n=wallCount(s.g);if(n!=p.walls){fin(k,"Peta ini perlu tepat "+p.walls+" penghalang. Hitung lagi petaknya.","no",0);return}
+if(bfs(s.g,p.st)<0){fin(k,"Robot belum punya jalan ke FINIS. Pindahkan satu penghalang.","no",0);return}
+if(!s.prog.length){fin(k,"Peta sudah punya jalan. Susun program untuk mengujinya.","no",0);return}
+run({t:{g:s.g},st:p.st},s,k)
+}
+function sum(p,s){
+var h='<div><b>Peta tantanganmu</b></div><table class="challenge-map" aria-label="Ringkasan peta">'+s.g.map(function(row){return '<tr>'+row.map(function(c){return '<td>'+(c=="S"?"S":c=="F"?"F":c=="#"?"■":"·")+'</td>'}).join("")+'</tr>'}).join("")+'</table>';
+return h+'<div>Penghalang: '+wallCount(s.g)+'. Program: '+s.prog.map(function(c){return IC[c]}).join(" → ")+'.</div><div>Robot berhasil diuji dari START ke FINIS. Bisakah kamu menjelaskan bagaimana teman dapat menguji peta ini?</div>'
+}
+
+return {MT:MT,H:H,P:P,init:init,view:view,tap:tap,go:go,sum:sum}})();
 
 var V=["A","B","C"],$=function(i){return document.getElementById(i)};
-var LV=[{n:1,t:"Urutan",s:"Urutan langkah dan memahami masalah",m:"sl"},{n:2,t:"Salah Itu Petunjuk",s:"Menguji dan memperbaiki",m:"pb"},{n:3,t:"Pecah dan Ulangi",s:"Dekomposisi, pola, perulangan"},{n:4,t:"Jika... Maka...",s:"Kondisi dan penalaran",m:"dt"},{n:5,t:"Pilih yang Penting",s:"Abstraksi dan efisiensi"},{n:6,t:"Perancang",s:"Membuat tantangan sendiri"}];
-var ORD=["sl","pb","dt"],NM={sl:"Susun Langkah",pb:"Pemburu Bug",dt:"Detektif Logika"};
-var MODS={sl:SL,pb:PB,dt:DT},HW={"sl":"<p class=\"mu\">Misi 1-2: ketuk kartu langkah agar urutannya benar, lalu tekan <b>Cek</b>. Misi 3-4: pilih kartu Maju, Kiri, Kanan untuk membawa 🤖 dari START ke 🏁 FINIS tanpa menabrak 📦, lalu tekan <b>Jalankan</b>. Kiri dan Kanan dihitung dari sudut pandang robot.</p>","pb":"<p class=\"mu\">Program robot sudah ada, tetapi ada bug. Tekan <b>Jalankan</b> dan lihat di mana robot gagal. Ketuk kartu yang dicurigai lalu ganti, sisipkan, atau hapus. Bug bukan kegagalan, bug adalah petunjuk.</p>","dt":"<p class=\"mu\">Ketuk kotak sekali untuk ✓ (cocok), dua kali untuk ✗ (tidak cocok), tiga kali untuk kosong. Setiap baris dan kolom hanya punya satu ✓. Ketuk petunjuk untuk melihat bagian tabel yang perlu dilihat.</p>"};
-var ST=load(),mod=null,v=0,cur=0,rot=0,S={},DN={},hi={},cache={};
+var LV=[{n:1,t:"Urutan",s:"Urutan langkah dan memahami masalah",m:"sl"},{n:2,t:"Salah Itu Petunjuk",s:"Menguji dan memperbaiki",m:"pb"},{n:3,t:"Pecah dan Ulangi",s:"Dekomposisi, pola, perulangan",m:"pu"},{n:4,t:"Jika... Maka...",s:"Kondisi dan penalaran",m:"dt"},{n:5,t:"Pilih yang Penting",s:"Abstraksi dan efisiensi",m:"ab"},{n:6,t:"Perancang",s:"Membuat dan menguji peta tantangan",m:"ra"}];
+var ORD=["sl","pb","pu","dt","ab","ra"],NM={sl:"Susun Langkah",pb:"Pemburu Bug",pu:"Pecah dan Ulangi",dt:"Detektif Logika",ab:"Pilih yang Penting",ra:"Perancang"};
+var MODS={sl:SL,pb:PB,pu:PU,dt:DT,ab:AB,ra:RA},HW={"sl":"<p class=\"mu\">Misi 1-2: ketuk kartu langkah agar urutannya benar, lalu tekan <b>Cek</b>. Misi 3-4: pilih kartu Maju, Kiri, Kanan untuk membawa 🤖 dari START ke 🏁 FINIS tanpa menabrak 📦, lalu tekan <b>Jalankan</b>. Kiri dan Kanan dihitung dari sudut pandang robot.</p>","pb":"<p class=\"mu\">Program robot sudah ada, tetapi ada bug. Tekan <b>Jalankan</b> dan lihat di mana robot gagal. Ketuk kartu yang dicurigai lalu ganti, sisipkan, atau hapus. Bug bukan kegagalan, bug adalah petunjuk.</p>","pu":"<p class=\"mu\">Misi 1: pilih langkah, lalu tempatkan dalam tugas kecil. Misi 2: cari ubin yang meneruskan pola. Misi 3: susun kartu perintah dan coba blok ulangi. Misi 4: bandingkan jumlah kartu pada tiga jalur dan pilih alasanmu.</p>","dt":"<p class=\"mu\">Ketuk kotak sekali untuk ✓ (cocok), dua kali untuk ✗ (tidak cocok), tiga kali untuk kosong. Setiap baris dan kolom hanya punya satu ✓. Ketuk petunjuk untuk melihat bagian tabel yang perlu dilihat. Setelah misi selesai, coba latihan aturan: pilih aksi untuk kondisi terpenuhi dan tidak terpenuhi, lalu uji.</p>","ab":"<p class=\"mu\">Misi 1-2: pilih informasi atau benda yang membantu tujuan. Misi 3: susun blok diagram dan cabang Ya/Tidak. Misi 4: baca kondisi, lalu pilih hasil untuk tiap contoh.</p>","ra":"<p class=\"mu\">Rancang petamu dengan mengetuk petak kosong untuk menaruh penghalang. Jumlah penghalang berbeda di tiap misi. Pastikan robot masih punya jalan ke FINIS, susun kartu perintah, lalu tekan Jalankan. Peta dan program hanya tersedia selama sesi ini.</p>"};
+var DEMO={
+sl:{title:"Urutan langkah",lead:"Langkah yang tepat perlu disusun dari awal sampai tujuan.",alt:"Gali tanah, letakkan benih, lalu siram sedikit.",scene:'<div class="demo-sequence"><span class="demo-step">Gali tanah</span><b class="demo-arrow">↓</b><span class="demo-step">Letakkan benih</span><b class="demo-arrow">↓</b><span class="demo-step">Siram sedikit</span></div>'},
+pb:{title:"Uji lalu perbaiki",lead:"Jalankan program, cari bagian yang keliru, lalu ubah bagian itu saja.",alt:"Program awal menuang air sebelum mengambil gelas. Uji menemukan masalah itu. Perbaiki urutan satu langkah.",scene:'<div class="demo-debug"><div class="demo-row"><b>Program awal</b><span class="demo-chip demo-bug-chip">Tuang air</span><span class="demo-chip">Ambil gelas</span><span class="demo-chip">Letakkan gelas</span></div><b class="demo-test">Uji: gelas belum siap saat air dituang</b><div class="demo-row demo-fix"><b>Perbaikan</b><span class="demo-chip">Ambil gelas</span><span class="demo-chip">Tuang air</span><span class="demo-chip">Letakkan gelas</span></div></div>'},
+pu:{title:"Pecah tugas dan cari pola",lead:"Kelompokkan pekerjaan menjadi bagian kecil. Langkah yang berulang bisa diringkas.",alt:"Siapkan kertas dan pensil, lalu kerjakan lipatan. Tiga langkah melipat dapat diringkas menjadi satu perintah ulang.",scene:'<div class="demo-split"><div class="demo-group demo-step"><b>Siapkan</b><span>Ambil kertas · Siapkan pensil</span></div><div class="demo-group demo-step"><b>Kerjakan</b><span>Lipat kertas · Buka lipatan</span></div><div class="demo-loop"><span class="demo-repeat-step">Lipat kertas</span><span class="demo-repeat-step">Lipat kertas</span><span class="demo-repeat-step">Lipat kertas</span><b class="demo-compact">→ Ulangi Lipat kertas 3 kali</b></div></div>'},
+dt:{title:"Periksa kondisi",lead:"Jawaban kondisi menentukan cabang yang diikuti.",alt:"Angka 12 lebih dari 10, jadi ikuti cabang Ya. Angka 5 tidak lebih dari 10, jadi ikuti cabang Tidak.",scene:'<div class="demo-flow"><div class="demo-condition">Periksa: angka lebih dari 10?</div><div class="demo-cases"><div class="demo-case demo-yes"><b>Angka 12</b><span>Ya → Laci atas</span></div><div class="demo-case demo-no"><b>Angka 5</b><span>Tidak → Laci bawah</span></div></div></div>'},
+ab:{title:"Pilih yang penting",lead:"Simpan detail yang membantu tujuan. Abaikan detail yang tidak berpengaruh.",alt:"Untuk memilih kotak, simpan ukuran, berat, dan apakah barang mudah pecah. Warna dinding dan jumlah jendela tidak membantu.",scene:'<div class="demo-abstraction"><div class="demo-details"><span class="demo-detail keep">Ukuran barang</span><span class="demo-detail keep">Berat barang</span><span class="demo-detail keep">Mudah pecah</span><span class="demo-detail discard">Warna dinding</span><span class="demo-detail discard">Jumlah jendela</span></div><b class="demo-filter">Pilih untuk kotak</b><div class="demo-selection"><span>Ukuran</span><b>+</b><span>Berat</span><b>+</b><span>Mudah pecah</span></div></div>'},
+ra:{title:"Rancang dan uji peta",lead:"Buat penghalang, pastikan jalan masih ada, lalu uji program.",alt:"Peta punya START, FINIS, dan petak yang bisa dihalangi. Uji program untuk memastikan robot menemukan jalan.",scene:'<div class="demo-maker"><div class="demo-mini-grid"><span>·</span><span>·</span><span>F</span><span>·</span><span>·</span><span>■</span><span>·</span><span>·</span><span>·</span><span>S</span></div><b class="demo-filter">Rancang → uji → jelaskan</b></div>'}
+},ST=load(),mod=null,v=0,cur=0,rot=0,S={},DN={},hi={},cache={},demoOpen=false;
 function load(){var d;try{d=JSON.parse(localStorage.getItem("alur.v1"))}catch(e){}return d&&d.profiles?d:{mode:"kelas",profiles:[],active:null}}
 function save(){try{localStorage.setItem("alur.v1",JSON.stringify(ST))}catch(e){}}
 function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
@@ -270,6 +578,7 @@ function pz(){var k=mod.id+":"+key();return cache[k]||(cache[k]=mod.P(cur,v))}
 function st(){var k=mod.id+":"+key();return S[k]||(S[k]=mod.init(pz()))}
 function msg(t,c){$("mg").textContent=t;$("mg").className="msg "+(c||"")}
 function rd(){if(mod)draw()}
+function actionText(){return mod.id=="sl"?"Cek / Jalankan":mod.id=="pb"||mod.id=="pu"&&cur==2||mod.id=="ra"?"Jalankan":"Cek jawaban"}
 function fin(k,t,c,w){if(k==key())msg(t,c);if(w){DN[mod.id+":"+k]=1;if(ST.mode=="mandiri"&&prof()){var a=prof().done[mod.id]=prof().done[mod.id]||[];if(a.indexOf(k%4)<0)a.push(k%4);save()}}draw();if(w&&k==key())$("wn").scrollIntoView({behavior:"smooth",block:"nearest"})}
 function home(){var p=prof(),m=ST.mode,h='<div class="card"><h2>Mode</h2><div class="seg"><button class="btn'+(m=="kelas"?'':' s')+'" data-md="kelas">Mode Kelas</button><button class="btn'+(m=="mandiri"?'':' s')+'" data-md="mandiri">Mode Mandiri</button></div><p class="mu">'+(m=="kelas"?"Satu perangkat di proyektor, anak maju bergiliran dengan 3 versi soal. Semua level terbuka.":"Siswa mengerjakan jalurnya sendiri di dalam kelas. Level dan misi terbuka satu per satu.")+'</p>';
 if(m=="mandiri"){h+='<p class="lb">Siapa yang bermain?</p><div class="seg">'+(ST.profiles.length?'<select id="pf" aria-label="Pilih siswa">'+ST.profiles.map(function(x){return '<option value="'+x.id+'"'+(x.id==ST.active?' selected':'')+'>'+esc(x.nama)+'</option>'}).join("")+'</select>':'')+'<input type="text" id="pn" maxlength="20" placeholder="Nama panggilan" aria-label="Nama panggilan"><button class="btn" id="pa">Tambah siswa</button></div>'+(p?'<p class="mu">Versi soal untuk siswa ini: <b>'+V[p.v]+'</b></p>':'<p class="mu">Tambahkan siswa dulu untuk mulai.</p>')+'<div class="seg"><button class="btn s" id="pe">Ekspor profil</button><button class="btn s" id="pi">Impor profil</button><input type="file" id="profile-file" accept="application/json,.json" hidden></div><p class="mu" id="profile-msg" aria-live="polite"></p>'}
@@ -277,15 +586,16 @@ h+='</div><div class="map">'+LV.map(function(l){var off=!l.m||locked(l.m),d=(l.m
 return '<button class="lv" data-lv="'+(l.m||"")+'"'+(off?' disabled':'')+'><span class="n">Level '+l.n+'</span><h3>'+l.t+'</h3><div>'+l.s+'</div><div class="st">'+(l.m?NM[l.m]+(locked(l.m)?' · terkunci':' · tersedia'):'Segera hadir')+'</div>'+(l.m?'<div class="dots" aria-label="Misi selesai">'+[0,1,2,3].map(function(i){return '<i class="'+(d.indexOf(i)>-1?'on':'')+'"></i>'}).join("")+'</div>':'')+'</button>'}).join("")+'</div>';
 $("home").innerHTML=h;show(0)}
 function show(p){$("home").hidden=!!p;$("play").hidden=!p;$("vt").hidden=!p||ST.mode!="kelas";$("tabs").hidden=!p;if(!p)mod=null}
-function openMod(id){mod=MODS[id];mod.id=id;var p=prof();DN={};S={};hi={};cur=0;rot=0;
+function openMod(id){mod=MODS[id];mod.id=id;var p=prof();DN={};S={};hi={};cur=0;rot=0;demoOpen=false;
 if(ST.mode=="mandiri"&&p){v=p.v;(p.done[id]||[]).forEach(function(m){DN[id+":"+(v*4+m)]=1});while(cur<3&&isDone(v*4+cur))cur++}else v=0;
 $("how").innerHTML='<summary>Cara bermain</summary>'+HW[id]+(ST.mode=="kelas"?'<p class="mu"><b>Aturan penonton:</b> boleh membacakan dan menjelaskan, tetapi jangan menyebut jawabannya. Anak di depan baru mengetuk setelah penonton sepakat.</p>':'');
-$("bc").textContent=id=="sl"?"Cek / Jalankan":id=="pb"?"Jalankan":"Cek jawaban";$("bt").hidden=ST.mode!="kelas";show(1);msg("");draw();window.scrollTo(0,0)}
+$("bt").hidden=ST.mode!="kelas";show(1);msg("");draw();window.scrollTo(0,0)}
 function bars(){var k=ST.mode=="kelas";
 $("vt").innerHTML=V.map(function(n,i){return '<button class="tab'+(i==v?' on':'')+(isDone(i*4+cur)?' dn':'')+'" role="tab" data-v="'+i+'">Anak '+ch(i)+' · Versi '+n+'</button>'}).join("");
 $("tabs").innerHTML=mod.MT.map(function(n,i){var lk=!k&&i>0&&!isDone(v*4+i-1);return '<button class="tab'+(i==cur?' on':'')+(isDone(v*4+i)?' dn':'')+'" role="tab" data-i="'+i+'"'+(lk?' disabled':'')+'>Misi '+(i+1)+'</button>'}).join("");
 $("tb").innerHTML='<span>'+(k?'Giliran: Anak '+ch(v)+' · Versi '+V[v]:(prof()?esc(prof().nama)+' · Versi '+V[v]:''))+' · '+NM[mod.id]+'</span><button class="btn s" id="bk">← Peta level</button>'}
-function draw(){if(!mod)return;var p=pz(),s=st();$("pt").textContent=mod.MT[cur]+" (Versi "+V[v]+")";$("ps").textContent=p.s||"";$("bd").innerHTML=mod.view(p,s);
+function demoView(){var d=DEMO[mod.id],open=demoOpen?' open':'';return '<details class="demo-details"'+open+'><summary>Animasi konsep: '+d.title+'</summary><p class="mu">'+d.lead+'</p><div class="demo-scene demo-'+mod.id+'" aria-hidden="true">'+d.scene+'</div><p class="demo-transcript">'+d.alt+'</p><button class="btn s demo-replay" type="button" data-demo-replay>Putar ulang contoh</button><span class="demo-status" aria-live="polite"></span></details>'}
+function draw(){if(!mod)return;var p=pz(),s=st();$("bc").textContent=actionText();$("pt").textContent=mod.MT[cur]+" (Versi "+V[v]+")";$("ps").textContent=p.s||"";$("bd").innerHTML=mod.view(p,s);$("demo-card").innerHTML=demoView();$("demo-card").querySelector("details").addEventListener("toggle",function(){demoOpen=this.open});
 if(isDone(key())){$("an").innerHTML=mod.sum(p,s);var nb=$("bn");nb.style.display="";
 if(ST.mode=="kelas"){if(v<2)nb.textContent="Giliran Anak "+ch(v+1)+" · Versi "+V[v+1];else if(cur<3)nb.textContent="Misi berikutnya · mulai Anak "+ch(0)+" · Versi A";else nb.style.display="none"}
 else nb.textContent=cur<3?"Misi berikutnya":"Kembali ke peta level";
@@ -299,6 +609,7 @@ if(b.dataset.lv)openMod(b.dataset.lv)});
 $("home").addEventListener("change",function(e){if(e.target.id=="pf"){ST.active=e.target.value;save();home()}});
 $("home").addEventListener("change",function(e){if(e.target.id=="profile-file"&&e.target.files&&e.target.files[0])importProfiles(e.target.files[0])});
 $("tb").addEventListener("click",function(e){if(e.target.closest("#bk"))home()});
+$("play").addEventListener("click",function(e){var b=e.target.closest("[data-demo-replay]");if(!b)return;var scene=$("demo-card").querySelector(".demo-scene");scene.classList.remove("is-playing");void scene.offsetWidth;scene.classList.add("is-playing");$("demo-card").querySelector(".demo-status").textContent="Animasi diputar."});
 $("bd").addEventListener("click",function(e){var p=pz(),s=st();if(s.run)return;if(mod.tap(e,p,s)){msg("");draw()}});
 $("bd").addEventListener("keydown",function(e){if((e.key=="Enter"||e.key==" ")&&e.target.tagName=="LI"){e.preventDefault();e.target.click()}});
 $("bc").onclick=function(){var s=st();if(s.run)return;mod.go(pz(),s,key())};

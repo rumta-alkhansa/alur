@@ -1,0 +1,45 @@
+{
+  "missions": [
+    {
+      "story": "Bantu menyiapkan robot ukur.",
+      "groups": ["Siapkan alat", "Rakit rangka", "Uji robot"],
+      "steps": ["Baca petunjuk", "Letakkan alat di meja", "Sambungkan rangka", "Pasang roda", "Pasang baterai", "Nyalakan robot"],
+      "order": [4, 0, 3, 1, 5, 2]
+    },
+    {
+      "story": "Bantu merakit lampu meja.",
+      "groups": ["Siapkan bahan", "Rakit lampu", "Uji lampu"],
+      "steps": ["Buka petunjuk", "Susun bagian di meja", "Sambungkan kabel", "Pasang kaki lampu", "Pasang bohlam", "Nyalakan sakelar"],
+      "order": [5, 0, 3, 4, 1, 2]
+    },
+    {
+      "story": "Bantu merakit kipas meja.",
+      "groups": ["Siapkan bahan", "Rakit kipas", "Uji kipas"],
+      "steps": ["Baca petunjuk", "Siapkan bagian kipas", "Sambungkan kabel", "Pasang baling-baling", "Pasang baterai", "Tekan tombol nyala"],
+      "order": [4, 2, 0, 3, 5, 1]
+    }
+  ],
+  "patterns": [
+    {
+      "story": "Ubin lantai punya pola bentuk.",
+      "sequence": ["●", "■", "▲", "●", "■", "▲", "●"],
+      "options": ["■", "▲", "●"],
+      "answer": 0
+    },
+    {
+      "story": "Simbol pada panel mengikuti pola.",
+      "sequence": ["■", "◆", "●", "■", "◆", "●", "■"],
+      "options": ["◆", "■", "●"],
+      "answer": 0
+    },
+    {
+      "story": "Papan hias memakai pola bentuk berulang.",
+      "sequence": ["▲", "●", "■", "▲", "●", "■", "▲"],
+      "options": ["▲", "●", "■"],
+      "answer": 1
+    }
+  ],
+  "grid": ["....F", ".....", ".....", ".....", "S...."],
+  "routes": ["FFFFRFFFF", "RFFFFLFFFF", "RFFFFLFFFLFFFFLFLFFFFLFF"],
+  "reasons": ["Jumlah kartu lebih sedikit", "Nama jalurnya lebih pendek", "Warnanya lebih terang"]
+}

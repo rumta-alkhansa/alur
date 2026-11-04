@@ -6,6 +6,29 @@ var H=[
 ["Mulai dari petunjuk berlambang ✓ hijau. Itu yang paling pasti.","Sesudah satu ✓ terpasang, lihat baris robot lain. Kotak mana yang masih mungkin?","Robot terakhir mendapat sisa tugas. Cocokkan dengan petunjuk ✗."],
 ["Mulai dari petunjuk berlambang ✓ hijau, lalu lanjut ke petunjuk yang menyebut robot yang sama dua kali.","Kalau satu robot sudah ✗ di dua kotak, pilihannya tinggal sedikit. Cek kolom yang sudah terpakai.","Kerjakan baris yang pilihannya paling sedikit lebih dulu."],
 ["Kerjakan Tabel B dulu dari dua petunjuk berlambang ✓ hijau. Sisanya terisi karena tinggal satu pilihan.","Tabel A: robot yang punya dua ✗ pasti memakai warna ketiga.","Robot yang ✗ pada satu tugas pasti bukan warna pemilik tugas itu. Cari warnanya.","Setelah Tabel A dan B terisi, salin hasilnya ke Tabel C."]];
+var RULES=[
+[
+{goal:"Jaga robot agar tidak menabrak.",condition:"sensor depan mendeteksi kardus",yes:"Berhenti",no:"Maju",other:"Belok kanan",yesCase:"kardus terdeteksi",noCase:"jalur kosong"},
+{goal:"Jaga robot agar aman di jalur.",condition:"sensor depan mendeteksi penghalang",yes:"Berhenti",no:"Maju",other:"Belok kiri",yesCase:"penghalang terdeteksi",noCase:"jalur kosong"},
+{goal:"Arahkan robot di lorong.",condition:"sensor jarak membaca benda dekat",yes:"Berhenti",no:"Maju",other:"Putar balik",yesCase:"benda terdeteksi",noCase:"lorong kosong"}
+],
+[
+{goal:"Atur lampu ruang kerja.",condition:"sensor membaca ruangan gelap",yes:"Nyalakan lampu",no:"Matikan lampu",other:"Bunyikan bel",yesCase:"ruangan gelap",noCase:"ruangan terang"},
+{goal:"Atur lampu meja.",condition:"sensor membaca cahaya redup",yes:"Nyalakan lampu",no:"Matikan lampu",other:"Tutup lampu",yesCase:"cahaya redup",noCase:"cahaya cukup"},
+{goal:"Atur lampu panel.",condition:"sensor mendeteksi keadaan gelap",yes:"Nyalakan lampu",no:"Matikan lampu",other:"Kirim tanda",yesCase:"panel gelap",noCase:"panel terang"}
+],
+[
+{goal:"Atur robot saat dayanya sedikit.",condition:"baterai robot lemah",yes:"Isi daya",no:"Lanjut tugas",other:"Matikan layar",yesCase:"baterai lemah",noCase:"baterai cukup"},
+{goal:"Atur gerobak robot saat dayanya sedikit.",condition:"daya hampir habis",yes:"Isi daya",no:"Lanjut tugas",other:"Bunyikan bel",yesCase:"daya hampir habis",noCase:"daya masih cukup"},
+{goal:"Atur alat ukur saat dayanya sedikit.",condition:"lampu baterai menyala merah",yes:"Isi daya",no:"Lanjut tugas",other:"Matikan alat",yesCase:"lampu baterai merah",noCase:"lampu baterai hijau"}
+],
+[
+{goal:"Jaga robot saat sensor lantai aktif.",condition:"sensor mendeteksi lantai basah",yes:"Berhenti",no:"Maju",other:"Belok kanan",yesCase:"lantai basah",noCase:"lantai kering"},
+{goal:"Jaga robot di jalur yang aman.",condition:"sensor membaca air di depan",yes:"Berhenti",no:"Maju",other:"Belok kiri",yesCase:"ada air",noCase:"tidak ada air"},
+{goal:"Atur robot saat alarm jalur berbunyi.",condition:"alarm bahaya aktif",yes:"Berhenti",no:"Maju",other:"Putar balik",yesCase:"alarm aktif",noCase:"alarm mati"}
+]
+];
+function ruleFor(m,v){var r=RULES[m][v],choices=[r.yes,r.no,r.other],shift=(m+v)%3;return {goal:r.goal,condition:r.condition,yesAction:r.yes,noAction:r.no,yesCase:r.yesCase,noCase:r.noCase,choices:choices.slice(shift).concat(choices.slice(0,shift)),tests:[{condition:1,label:r.yesCase},{condition:0,label:r.noCase},{condition:1,label:r.yesCase}]}}
 var D=[
 [{s:"Tiga komponen robot disimpan di tiga kotak. Satu komponen, satu kotak.",g:[G(["🔋 Baterai","⚙️ Motor","📡 Sensor"],["Kotak 1","Kotak 2","Kotak 3"],[1,2,0])],k:[K("Baterai ada di Kotak 2.","🔋 Baterai","✓","Kotak 2",0,0,1),K("Motor tidak ada di Kotak 1.","⚙️ Motor","✗","Kotak 1",0,1,0)]},
 {s:"Tiga komponen robot disimpan di tiga rak. Satu komponen, satu rak.",g:[G(["💡 Lampu","🛞 Roda","🔌 Kabel"],["Rak 1","Rak 2","Rak 3"],[2,0,1])],k:[K("Lampu ada di Rak 3.","💡 Lampu","✓","Rak 3",0,0,2),K("Roda tidak ada di Rak 2.","🛞 Roda","✗","Rak 2",0,1,1)]},
@@ -19,16 +42,21 @@ var D=[
 [{s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-X","🤖 Robo-Y","🤖 Robo-Z"],["🔴 Merah","🔵 Biru","🟡 Kuning"],[2,0,1],"Tabel A: Robot dan Warna"),G(["🔴 Merah","🔵 Biru","🟡 Kuning"],["🏗️ Mengangkat","✏️ Menggambar","🧹 Menyapu"],[1,0,2],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-X","🤖 Robo-Y","🤖 Robo-Z"],["🏗️ Mengangkat","✏️ Menggambar","🧹 Menyapu"],[2,1,0],"Tabel C: Robot dan Tugas")],k:[K("Robot merah bertugas menggambar.","🔴 Merah","✓","✏️ Menggambar",1,0,1),K("Robo-X bukan robot biru.","Robo-X","✗","🔵 Biru",0,0,1),K("Robo-X juga bukan robot merah.","Robo-X","✗","🔴 Merah",0,0,0),K("Robot kuning bertugas menyapu.","🟡 Kuning","✓","🧹 Menyapu",1,2,2),K("Robo-Y tidak bertugas mengangkat.","Robo-Y","✗","🏗️ Mengangkat",2,1,0)]},
 {s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-P","🤖 Robo-Q","🤖 Robo-R"],["🟢 Hijau","🟠 Oranye","🟣 Ungu"],[2,1,0],"Tabel A: Robot dan Warna"),G(["🟢 Hijau","🟠 Oranye","🟣 Ungu"],["🔍 Mengukur","📦 Memindah","🔔 Memberi tanda"],[2,1,0],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-P","🤖 Robo-Q","🤖 Robo-R"],["🔍 Mengukur","📦 Memindah","🔔 Memberi tanda"],[0,1,2],"Tabel C: Robot dan Tugas")],k:[K("Robot oranye bertugas memindah.","🟠 Oranye","✓","📦 Memindah",1,1,1),K("Robo-P bukan robot hijau.","Robo-P","✗","🟢 Hijau",0,0,0),K("Robo-P juga bukan robot oranye.","Robo-P","✗","🟠 Oranye",0,0,1),K("Robot ungu bertugas mengukur.","🟣 Ungu","✓","🔍 Mengukur",1,2,0),K("Robo-Q tidak memberi tanda.","Robo-Q","✗","🔔 Memberi tanda",2,1,2)]},
 {s:"Setiap robot punya warna dan tugas. Tiga tabel kecil saling membantu. Kerjakan Tabel B lebih dulu!",g:[G(["🤖 Robo-S","🤖 Robo-T","🤖 Robo-U"],["⚪ Putih","⚫ Hitam","🟤 Cokelat"],[1,0,2],"Tabel A: Robot dan Warna"),G(["⚪ Putih","⚫ Hitam","🟤 Cokelat"],["🔧 Merakit","🚚 Mengantar","🧽 Membersihkan"],[1,2,0],"Tabel B: Warna dan Tugas"),G(["🤖 Robo-S","🤖 Robo-T","🤖 Robo-U"],["🔧 Merakit","🚚 Mengantar","🧽 Membersihkan"],[2,1,0],"Tabel C: Robot dan Tugas")],k:[K("Robot putih bertugas mengantar.","⚪ Putih","✓","🚚 Mengantar",1,0,1),K("Robo-S bukan robot putih.","Robo-S","✗","⚪ Putih",0,0,0),K("Robo-S juga bukan robot cokelat.","Robo-S","✗","🟤 Cokelat",0,0,2),K("Robot hitam bertugas membersihkan.","⚫ Hitam","✓","🧽 Membersihkan",1,1,2),K("Robo-T tidak bertugas merakit.","Robo-T","✗","🔧 Merakit",2,1,0)]}]];
-function P(m,v){return D[m][v]}
-function init(p){return {sg:p.g.map(function(g){return g.r.map(function(){return g.c.map(function(){return 0})})}),kd:{},hk:-1,auto:true,bad:[]}}
+function P(m,v){var p=D[m][v];return {s:p.s,g:p.g,k:p.k,rule:ruleFor(m,v)}}
+function init(p){return {sg:p.g.map(function(g){return g.r.map(function(){return g.c.map(function(){return 0})})}),kd:{},hk:-1,auto:true,bad:[],ruleYes:-1,ruleNo:-1,ruleResults:[]}}
 function okg(p,s,gi){var g=p.g[gi],x=s.sg[gi];return g.a.every(function(c,r){return x[r][c]==1})&&x.every(function(row,r){return row.every(function(y,c){return y!=1||g.a[r]==c})})}
 function hlc(p,s,g,r,c){var k=p.k[s.hk];if(!k)return "";var o="";k.f.forEach(function(f){if(f[0]==g){if(f[1]==r||f[2]==c)o=" hl";if(f[1]==r&&f[2]==c)o=" hl hl2"}});return o}
 function view(p,s){
 var h='<ol class="k">'+p.k.map(function(c,i){var d=s.kd[i];return '<li tabindex="0" class="'+(d?'dn ':'')+(i==s.hk?'sel':'')+'" data-k="'+i+'"><b>'+(i+1)+'</b><div class="kt"><span>'+c.t+'</span><span class="vz"><i>'+c.v[0]+'</i><u class="'+(c.v[1]=="✓"?'y':'n')+'">'+c.v[1]+'</u><i>'+c.v[2]+'</i></span></div><button class="ck" data-ck="'+i+'">'+(d?'Pakai lagi':'Sudah dipakai')+'</button></li>'}).join("")+'</ol>';
 h+=p.g.map(function(g,gi){var t=(g.n?'<div class="gt">'+g.n+'</div>':'')+'<div class="sc"><table><tr><th></th>'+g.c.map(function(c){var m=c.split(" ");return '<th><span class="e">'+m[0]+'</span>'+m.slice(1).join(" ")+'</th>'}).join("")+'</tr>';
 g.r.forEach(function(r,ri){var m=r.split(" ");t+='<tr><th class="r">'+m[0]+" "+m.slice(1).join(" ")+'</th>';g.c.forEach(function(c,ci){var x=s.sg[gi][ri][ci],b=s.bad.indexOf(gi+"-"+ri+"-"+ci)>-1;t+='<td><button class="cell c'+x+hlc(p,s,gi,ri,ci)+(b?' bad':'')+'" data-g="'+gi+'" data-r="'+ri+'" data-c="'+ci+'" aria-label="'+r+' dan '+c+'">'+["","✓","✗"][x]+'</button></td>'});t+='</tr>'});return t+'</table></div>'}).join("");
-return h+'<div class="bar"><button class="btn s" data-auto="1">Coret otomatis: '+(s.auto?'nyala':'mati')+'</button></div>'}
+ h+='<div class="bar"><button class="btn s" data-auto="1">Coret otomatis: '+(s.auto?'nyala':'mati')+'</button></div>';
+ if(isDone(key())){var r=p.rule;h+='<section class="rule-box"><h3>Latihan singkat: Jika… Maka…</h3><p>'+r.goal+'</p><p>Pilih aturan untuk mesin ini.</p><div class="rule-row"><b>Jika '+r.condition+', maka…</b><div class="pg">'+r.choices.map(function(a,i){return '<button class="pc'+(s.ruleYes==i?' sel':'')+'" data-rule-yes="'+i+'">'+a+'</button>'}).join("")+'</div></div><div class="rule-row"><b>Jika kondisi tidak terpenuhi, maka…</b><div class="pg">'+r.choices.map(function(a,i){return '<button class="pc'+(s.ruleNo==i?' sel':'')+'" data-rule-no="'+i+'">'+a+'</button>'}).join("")+'</div></div><p class="lb">Uji aturan:</p><div class="pg">'+r.tests.map(function(t,i){var result=s.ruleResults[i];return '<button class="btn s rule-test" data-rule-test="'+i+'"'+(s.ruleYes<0||s.ruleNo<0?' disabled':'')+'>Uji '+(i+1)+': '+t.label+'</button>'+(result?'<span class="rule-result '+(result.ok?'ok':'no')+'">'+result.text+'</span>':'')}).join("")+'</div><p class="mu">Latihan ini opsional. Hasilnya tidak mengubah progres misi.</p></section>'}
+ return h}
 function tap(e,p,s){var t=e.target,c;
+if(c=t.closest("[data-rule-yes]")){s.ruleYes=+c.dataset.ruleYes;s.ruleResults=[];return 1}
+if(c=t.closest("[data-rule-no]")){s.ruleNo=+c.dataset.ruleNo;s.ruleResults=[];return 1}
+if(c=t.closest("[data-rule-test]")){var ri=+c.dataset.ruleTest,test=p.rule.tests[ri],actionIndex=test.condition?s.ruleYes:s.ruleNo,action=p.rule.choices[actionIndex],right=test.condition?p.rule.yesAction:p.rule.noAction,ok=action==right;s.ruleResults[ri]={ok:ok,text:(test.condition?"Kondisi terpenuhi. ":"Kondisi tidak terpenuhi. ")+"Mesin memilih “"+action+"”. "+(ok?"Aturan cocok untuk uji ini.":"Coba pikirkan lagi aturanmu.")};return 1}
 if(c=t.closest(".ck")){var i=+c.dataset.ck;s.kd[i]=!s.kd[i];return 1}
 if(c=t.closest(".cell")){var g=+c.dataset.g,r=+c.dataset.r,k=+c.dataset.c,x=s.sg[g],n=(x[r][k]+1)%3;x[r][k]=n;s.bad=[];
 if(n==1&&s.auto){x[r].forEach(function(y,i){if(i!=k&&!y)x[r][i]=2});x.forEach(function(row,i){if(i!=r&&!row[k])row[k]=2})}
